@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemisDemoXamarin.iOS", "Th
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemisDemoXamarin", "ThemisDemoXamarin\ThemisDemoXamarin.csproj", "{689365FF-B1E8-4278-8AE0-55B55301B604}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{85488F99-3F03-4846-BE13-E137636E9726}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,5 +55,10 @@ Global
 		{689365FF-B1E8-4278-8AE0-55B55301B604}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{689365FF-B1E8-4278-8AE0-55B55301B604}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{689365FF-B1E8-4278-8AE0-55B55301B604}.Release|iPhone.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{689365FF-B1E8-4278-8AE0-55B55301B604} = {85488F99-3F03-4846-BE13-E137636E9726}
+		{76654A66-C224-4711-AED5-66CAE8BF9410} = {85488F99-3F03-4846-BE13-E137636E9726}
+		{A53A2AE4-99A3-4A96-AF6C-BD7C719D0EF0} = {85488F99-3F03-4846-BE13-E137636E9726}
 	EndGlobalSection
 EndGlobal
