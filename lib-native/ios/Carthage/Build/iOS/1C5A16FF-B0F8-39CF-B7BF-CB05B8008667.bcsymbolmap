@@ -1,0 +1,654 @@
+BCSymbolMap Version: 2.0
+Apple clang version 11.0.0 (clang-1100.0.33.12)
+/tmp/themis/Carthage/Checkouts/themis/src/themis/message.c
+/private/tmp/themis/Carthage/Checkouts/themis
+themis_message_get_length
+themis_message_get_data
+themis_message_destroy
+themis_message_set
+themis_message_init
+/tmp/themis/Carthage/Checkouts/themis/src/themis/secure_cell.c
+themis_secure_cell_decrypt_context_imprint
+themis_secure_cell_encrypt_context_imprint
+themis_secure_cell_decrypt_token_protect
+themis_secure_cell_encrypt_token_protect
+themis_secure_cell_decrypt_seal
+themis_secure_cell_encrypt_seal
+_ed_sign
+_secure_comparator_alice_step3
+_ed_verify
+_ge_is_zero
+_ed_dbl_base_verify
+_ed_dbl_base_sign
+_ed_point_sign
+_secure_comparator_alice_step5
+_ed_point_verify
+_secure_comparator_bob_step4
+/tmp/themis/Carthage/Checkouts/themis/src/themis/secure_comparator.c
+secure_comparator_bob_step4
+ed_point_verify
+secure_comparator_alice_step5
+ed_point_sign
+ed_dbl_base_sign
+ed_dbl_base_verify
+ge_is_zero
+ed_verify
+secure_comparator_alice_step3
+ed_sign
+secure_comparator_get_result
+secure_comparator_proceed_compare
+secure_comparator_bob_step2
+secure_comparator_begin_compare
+secure_comparator_alice_step1
+secure_comparator_append_secret
+secure_comparator_destroy
+secure_comparator_create
+secure_comparator_cleanup
+secure_comparator_init
+/tmp/themis/Carthage/Checkouts/themis/src/themis/secure_keygen.c
+themis_is_valid_asym_key
+themis_get_asym_key_kind
+themis_gen_ec_key_pair
+themis_gen_rsa_key_pair
+themis_gen_key_pair
+/tmp/themis/Carthage/Checkouts/themis/src/themis/secure_message_wrapper.c
+themis_secure_message_decrypter_destroy
+themis_secure_message_rsa_decrypter_destroy
+themis_secure_message_ec_decrypter_destroy
+themis_secure_message_ec_encrypter_destroy
+themis_secure_message_decrypter_proceed
+themis_secure_message_decrypter_init
+themis_secure_message_ec_decrypter_init
+themis_secure_message_encrypter_destroy
+themis_secure_message_encrypter_proceed
+themis_secure_message_encrypter_init
+themis_secure_message_ec_decrypter_proceed
+themis_secure_message_ec_encrypter_proceed
+themis_secure_message_ec_encrypter_init
+themis_secure_message_rsa_decrypter_proceed
+themis_secure_message_rsa_decrypter_init
+themis_secure_message_rsa_encrypter_proceed
+themis_secure_message_rsa_encrypter_destroy
+themis_secure_message_rsa_encrypter_init
+themis_secure_message_verifier_destroy
+themis_secure_message_verifier_proceed
+themis_secure_message_verifier_init
+themis_secure_message_signer_destroy
+themis_secure_message_signer_proceed
+themis_secure_message_signer_init
+get_alg_id
+_valid_private_key
+_valid_public_key
+_matching_key_kinds
+/tmp/themis/Carthage/Checkouts/themis/src/themis/secure_message.c
+themis_secure_message_unwrap
+themis_secure_message_wrap
+themis_secure_message_verify
+themis_secure_message_sign
+themis_secure_message_decrypt
+matching_key_kinds
+valid_public_key
+valid_private_key
+themis_secure_message_encrypt
+/tmp/themis/Carthage/Checkouts/themis/src/themis/secure_session_message.c
+secure_session_unwrap
+secure_session_wrap
+/tmp/themis/Carthage/Checkouts/themis/src/themis/secure_session_peer.c
+secure_session_peer_init
+secure_session_peer_cleanup
+/tmp/themis/Carthage/Checkouts/themis/src/themis/secure_session_serialize.c
+secure_session_load
+secure_session_save
+/tmp/themis/Carthage/Checkouts/themis/src/themis/secure_session_utils.c
+secure_session_derive_message_keys
+encrypt_gcm
+verify_mac
+compute_mac
+verify_signature
+compute_signature
+get_peer_key_sign_type
+get_key_sign_type
+_secure_session_accept
+_secure_session_proceed_client
+_secure_session_finish_server
+_secure_session_finish_client
+/tmp/themis/Carthage/Checkouts/themis/src/themis/secure_session.c
+secure_session_finish_client
+secure_session_finish_server
+secure_session_get_remote_id
+secure_session_receive
+secure_session_is_established
+secure_session_send
+secure_session_connect
+secure_session_proceed_client
+secure_session_generate_connect_request
+secure_session_create
+secure_session_accept
+secure_session_init
+secure_session_check_user_callbacks
+secure_session_destroy
+secure_session_cleanup
+/tmp/themis/Carthage/Checkouts/themis/src/themis/sym_enc_message.c
+themis_sym_decrypt_message_u
+themis_sym_kdf
+themis_sym_decrypt_message_u_
+themis_sym_encrypt_message_u
+themis_sym_encrypt_message_u_
+themis_auth_sym_decrypt_message
+themis_auth_sym_decrypt_message_
+themis_auth_sym_encrypt_message
+themis_auth_sym_encrypt_message_
+themis_sym_plain_decrypt
+themis_sym_plain_encrypt
+themis_auth_sym_plain_decrypt
+themis_auth_sym_plain_encrypt
+/tmp/themis/Carthage/Checkouts/themis/src/soter/soter_container.c
+soter_container_set_data_size
+soter_container_const_data
+soter_container_data
+soter_container_data_size
+soter_verify_container_checksum
+_OSSwapInt32
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.2.sdk/usr/include/libkern/arm/OSByteOrder.h
+soter_update_container_checksum
+_crc_c
+/tmp/themis/Carthage/Checkouts/themis/src/soter/soter_crc32.c
+soter_crc32
+soter_crc32_final
+soter_crc32_update
+soter_crc32_create
+/tmp/themis/Carthage/Checkouts/themis/src/soter/soter_hmac.c
+soter_hmac_destroy
+soter_hmac_cleanup
+soter_hmac_create
+soter_hmac_final
+soter_hmac_update
+soter_hmac_init
+hash_block_size
+/tmp/themis/Carthage/Checkouts/themis/src/soter/soter_kdf.c
+soter_kdf
+/tmp/themis/Carthage/Checkouts/themis/src/soter/soter_sign.c
+soter_verify_get_alg_id
+soter_sign_get_alg_id
+soter_sign_destroy
+soter_verify_destroy
+soter_verify_create
+soter_sign_create
+soter_verify_cleanup
+soter_sign_cleanup
+soter_verify_final
+soter_sign_final
+soter_verify_update
+soter_sign_update
+soter_sign_export_key
+soter_verify_init
+soter_sign_init
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_asym_cipher.c
+soter_asym_cipher_destroy
+soter_asym_cipher_cleanup
+soter_asym_cipher_create
+soter_asym_cipher_decrypt
+soter_asym_cipher_encrypt
+soter_asym_cipher_init
+soter_asym_cipher_import_key
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_asym_ka.c
+soter_asym_ka_derive
+soter_asym_ka_export_key
+soter_asym_ka_import_key
+soter_asym_ka_gen_key
+soter_asym_ka_destroy
+soter_asym_ka_cleanup
+soter_asym_ka_create
+soter_asym_ka_init
+soter_alg_to_curve_nid
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_ec_key.c
+soter_ec_priv_key_to_engine_specific
+ec_priv_key_size
+soter_ec_pub_key_to_engine_specific
+ec_pub_key_size
+soter_engine_specific_to_ec_priv_key
+ec_priv_key_tag
+bn_encode
+is_curve_supported
+soter_engine_specific_to_ec_pub_key
+ec_pub_key_tag
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_ecdsa_common.c
+soter_ec_export_key
+soter_ec_import_key
+soter_ec_gen_key
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_hash.c
+soter_hash_destroy
+soter_hash_cleanup
+soter_hash_create
+soter_hash_final
+soter_hash_update
+soter_hash_init
+soter_algo_to_evp_md
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_rand.c
+soter_rand
+/tmp/themis/Carthage/Checkouts/themis/src/soter/soter_ec_key.c
+soter_ec_priv_key_check_length
+soter_ec_pub_key_check_length
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_rsa_common.c
+soter_rsa_export_key
+soter_rsa_import_key
+soter_rsa_gen_key
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_rsa_key_pair_gen.c
+soter_rsa_key_pair_gen_export_key
+soter_rsa_key_pair_gen_destroy
+soter_rsa_key_pair_gen_cleanup
+soter_rsa_key_pair_gen_init
+soter_set_rsa_key_length
+rsa_key_length
+soter_set_default_rsa_pub_exp
+soter_rsa_key_pair_gen_create
+_rsa_pub_key_size
+_bignum_to_bytes
+_rsa_priv_key_size
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_rsa_key.c
+soter_rsa_priv_key_to_engine_specific
+soter_rsa_pub_key_to_engine_specific
+rsa_priv_key_size
+soter_engine_specific_to_rsa_priv_key
+rsa_priv_key_tag
+is_mod_size_supported
+bignum_to_bytes
+rsa_pub_key_size
+soter_engine_specific_to_rsa_pub_key
+rsa_pub_key_tag
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_wipe.c
+soter_wipe
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_sign_ecdsa.c
+soter_sign_cleanup_ecdsa_none_pkcs8
+soter_sign_final_ecdsa_none_pkcs8
+soter_sign_update_ecdsa_none_pkcs8
+soter_sign_export_key_ecdsa_none_pkcs8
+soter_sign_init_ecdsa_none_pkcs8
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_sign_rsa.c
+soter_sign_cleanup_rsa_pss_pkcs8
+soter_sign_final_rsa_pss_pkcs8
+soter_sign_update_rsa_pss_pkcs8
+soter_sign_export_key_rsa_pss_pkcs8
+soter_sign_init_rsa_pss_pkcs8
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_sym.c
+soter_sym_aead_decrypt_destroy
+soter_sym_ctx_destroy
+soter_sym_aead_decrypt_final
+soter_sym_aead_decrypt_aad
+soter_sym_ctx_update
+soter_sym_aead_decrypt_update
+soter_sym_aead_decrypt_create
+soter_sym_aead_encrypt_destroy
+soter_sym_aead_encrypt_final
+soter_sym_aead_encrypt_aad
+soter_sym_aead_encrypt_update
+soter_sym_aead_encrypt_create
+soter_sym_decrypt_destroy
+soter_sym_decrypt_final
+soter_sym_decrypt_update
+soter_sym_decrypt_create
+soter_sym_encrypt_final
+soter_sym_encrypt_update
+soter_sym_encrypt_create
+soter_sym_aead_ctx_final
+soter_sym_ctx_final
+soter_sym_aead_ctx_init
+soter_sym_encrypt_destroy
+soter_sym_ctx_init
+algid_to_evp_aead
+algid_to_evp
+soter_withkdf
+soter_pbkdf2
+soter_nokdf
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_verify_ecdsa.c
+soter_verify_cleanup_ecdsa_none_pkcs8
+soter_verify_final_ecdsa_none_pkcs8
+soter_verify_update_ecdsa_none_pkcs8
+soter_verify_init_ecdsa_none_pkcs8
+/tmp/themis/Carthage/Checkouts/themis/src/soter/openssl/soter_verify_rsa.c
+soter_verify_cleanup_rsa_pss_pkcs8
+soter_verify_final_rsa_pss_pkcs8
+soter_verify_update_rsa_pss_pkcs8
+soter_verify_init_rsa_pss_pkcs8
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_0.c
+crypto_sign_ed25519_ref10_fe_0
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_1.c
+crypto_sign_ed25519_ref10_fe_1
+/tmp/themis/Carthage/Checkouts/themis/src/soter/soter_rsa_key.c
+soter_rsa_priv_key_check_length
+soter_rsa_pub_key_check_length
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_add.c
+crypto_sign_ed25519_ref10_fe_add
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_cmov.c
+crypto_sign_ed25519_ref10_fe_cmov
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_copy.c
+crypto_sign_ed25519_ref10_fe_copy
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_frombytes.c
+crypto_sign_ed25519_ref10_fe_frombytes
+load_3
+load_4
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_invert.c
+crypto_sign_ed25519_ref10_fe_invert
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_isnegative.c
+crypto_sign_ed25519_ref10_fe_isnegative
+_crypto_sign_ed25519_ref10_fe_isnonzero.zero
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_isnonzero.c
+crypto_sign_ed25519_ref10_fe_isnonzero
+crypto_verify_32
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_mul.c
+crypto_sign_ed25519_ref10_fe_mul
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_neg.c
+crypto_sign_ed25519_ref10_fe_neg
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_pow22523.c
+crypto_sign_ed25519_ref10_fe_pow22523
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_sq.c
+crypto_sign_ed25519_ref10_fe_sq
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_sq2.c
+crypto_sign_ed25519_ref10_fe_sq2
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_sub.c
+crypto_sign_ed25519_ref10_fe_sub
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/fe_tobytes.c
+crypto_sign_ed25519_ref10_fe_tobytes
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_add.c
+crypto_sign_ed25519_ref10_ge_add
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_cmp.c
+ge_cmp
+_slide
+_Bi
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_double_scalarmult.c
+slide
+crypto_sign_ed25519_ref10_ge_double_scalarmult_vartime
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_frombytes_no_negate.c
+ge_frombytes_vartime
+_d
+_sqrtm1
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_frombytes.c
+crypto_sign_ed25519_ref10_ge_frombytes_negate_vartime
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_madd.c
+crypto_sign_ed25519_ref10_ge_madd
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_msub.c
+crypto_sign_ed25519_ref10_ge_msub
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p1p1_to_p2.c
+crypto_sign_ed25519_ref10_ge_p1p1_to_p2
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p1p1_to_p3.c
+crypto_sign_ed25519_ref10_ge_p1p1_to_p3
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p2_0.c
+crypto_sign_ed25519_ref10_ge_p2_0
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p2_dbl.c
+crypto_sign_ed25519_ref10_ge_p2_dbl
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p2_to_p3.c
+ge_p2_to_p3
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p3_0.c
+crypto_sign_ed25519_ref10_ge_p3_0
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p3_dbl.c
+crypto_sign_ed25519_ref10_ge_p3_dbl
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p3_sub.c
+ge_p3_sub
+_d2
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p3_to_cached.c
+crypto_sign_ed25519_ref10_ge_p3_to_cached
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p3_to_p2.c
+crypto_sign_ed25519_ref10_ge_p3_to_p2
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_p3_tobytes.c
+crypto_sign_ed25519_ref10_ge_p3_tobytes
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_precomp_0.c
+crypto_sign_ed25519_ref10_ge_precomp_0
+_select
+_cmov
+_base
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_scalarmult_base.c
+cmov
+select
+equal
+negative
+crypto_sign_ed25519_ref10_ge_scalarmult_base
+llvm.loop.isvectorized
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_scalarmult.c
+ge_scalarmult_blinded
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_sub.c
+crypto_sign_ed25519_ref10_ge_sub
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/ge_tobytes.c
+crypto_sign_ed25519_ref10_ge_tobytes
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/gen_rand_32.c
+generate_random_32
+clip_random_32
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/sc_muladd.c
+crypto_sign_ed25519_ref10_sc_muladd
+/tmp/themis/Carthage/Checkouts/themis/src/soter/ed25519/sc_reduce.c
+crypto_sign_ed25519_ref10_sc_reduce
+-[TSCell initWithKey:]
+-[TSCell key]
+-[TSCell setKey:]
+-[TSCell .cxx_destruct]
+_OBJC_IVAR_$_TSCell._key
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/scell.m
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/scell.h
+-[TSSessionTransportInterface init]
+-[TSSessionTransportInterface sendData:error:]
+-[TSSessionTransportInterface receiveDataWithError:]
+-[TSSessionTransportInterface publicKeyFor:error:]
+-[TSSessionTransportInterface callbacks]
+_OBJC_IVAR_$_TSSessionTransportInterface._callbacks
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/ssession_transport_interface.m
+on_get_public_key_for_id_callback
+on_state_changed_callback
+on_receive_callback
+on_send_callback
+-[TSMessage initInEncryptModeWithPrivateKey:peerPublicKey:]
+-[TSMessage initInSignVerifyModeWithPrivateKey:peerPublicKey:]
+-[TSMessage wrapData:error:]
+-[TSMessage unwrapData:error:]
+-[TSMessage privateKey]
+-[TSMessage setPrivateKey:]
+-[TSMessage publicKey]
+-[TSMessage setPublicKey:]
+-[TSMessage mode]
+-[TSMessage setMode:]
+-[TSMessage .cxx_destruct]
+_OBJC_IVAR_$_TSMessage._privateKey
+_OBJC_IVAR_$_TSMessage._publicKey
+_OBJC_IVAR_$_TSMessage._mode
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/smessage.m
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/smessage.h
+-[TSSession initWithUserId:privateKey:callbacks:]
+-[TSSession connect:]
+-[TSSession connectRequest:]
+-[TSSession wrapData:error:]
+-[TSSession unwrapData:error:]
+-[TSSession wrapAndSend:error:]
+-[TSSession unwrapAndReceive:error:]
+-[TSSession isSessionEstablished]
+-[TSSession session]
+-[TSSession setSession:]
+_OBJC_IVAR_$_TSSession._session
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/ssession.m
+-[TSCellTokenEncryptedData cipherText]
+-[TSCellTokenEncryptedData setCipherText:]
+-[TSCellTokenEncryptedData token]
+-[TSCellTokenEncryptedData setToken:]
+-[TSCellTokenEncryptedData .cxx_destruct]
+-[TSCellToken initWithKey:]
+-[TSCellToken wrapData:error:]
+-[TSCellToken unwrapData:error:]
+-[TSCellToken wrapData:context:error:]
+-[TSCellToken unwrapData:context:error:]
+_OBJC_IVAR_$_TSCellTokenEncryptedData._cipherText
+_OBJC_IVAR_$_TSCellTokenEncryptedData._token
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/scell_token.m
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/scell_token.h
+-[TSCellContextImprint initWithKey:]
+-[TSCellContextImprint wrapData:context:error:]
+-[TSCellContextImprint unwrapData:context:error:]
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/scell_context_imprint.m
+-[TSCellSeal initWithKey:]
+-[TSCellSeal wrapData:error:]
+-[TSCellSeal unwrapData:error:]
+-[TSCellSeal wrapData:context:error:]
+-[TSCellSeal unwrapData:context:error:]
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/scell_seal.m
+-[TSKeyGen initWithAlgorithm:]
+-[TSKeyGen generateKeys]
+-[TSKeyGen privateKey]
+-[TSKeyGen setPrivateKey:]
+-[TSKeyGen publicKey]
+-[TSKeyGen setPublicKey:]
+-[TSKeyGen algorithm]
+-[TSKeyGen setAlgorithm:]
+-[TSKeyGen .cxx_destruct]
+_OBJC_IVAR_$_TSKeyGen._privateKey
+_OBJC_IVAR_$_TSKeyGen._publicKey
+_OBJC_IVAR_$_TSKeyGen._algorithm
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/skeygen.m
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/skeygen.h
+-[TSComparator initWithMessageToCompare:]
+-[TSComparator dealloc]
+-[TSComparator beginCompare:]
+-[TSComparator proceedCompare:error:]
+-[TSComparator status]
+-[TSComparator comparator]
+-[TSComparator setComparator:]
+_OBJC_IVAR_$_TSComparator._comparator
+/tmp/themis/Carthage/Checkouts/themis/src/wrappers/themis/Obj-C/objcthemis/scomparator.m
+/Users/dodikk/Library/Caches/org.carthage.CarthageKit/DerivedData/11.2_11B52/themis/0.12.1/Build/Intermediates.noindex/ArchiveIntermediates/Themis (iOS)/IntermediateBuildFilesPath/Themis.build/Release-iphoneos/Themis (iOS).build/DerivedSources/themis_vers.c
+__ZL15__ARCLite__loadv
+__ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+__ZL22add_image_hook_swiftV1PK11mach_headerl
+__ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
+__ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector
+__ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_
+__ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j
+__ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_
+__ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_
+__ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_
+__ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_
+__ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_
+__ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary
+__ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info
+__ZL32__arclite_objc_allocateClassPairP10objc_classPKcm
+__ZL32__arclite_object_getIndexedIvarsP11objc_object
+__ZL23__arclite_objc_getClassPKc
+__ZL27__arclite_objc_getMetaClassPKc
+__ZL31__arclite_objc_getRequiredClassPKc
+__ZL26__arclite_objc_lookUpClassPKc
+__ZL26__arclite_objc_getProtocolPKc
+__ZL23__arclite_class_getNameP10objc_class
+__ZL26__arclite_protocol_getNameP8Protocol
+__ZL37__arclite_objc_copyClassNamesForImagePKcPj
+__ZL17transcribeMethodsP10objc_classP15glue_class_ro_t
+__ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t
+__ZL20transcribePropertiesP10objc_classP15glue_class_ro_t
+__ZL14initialize_impP11objc_objectP13objc_selector
+__ZL18allocateMaybeSwiftP18glue_swift_class_tm
+__ZL22copySwiftV1MangledNamePKcb
+__ZL13demangledNamePKcb
+__ZL16scanMangledFieldRPKcS0_S1_Ri
+__ZL30arclite_uninitialized_functionv
+__ZL12cxxConstructP11objc_object
+__ZL20fixStringForCoreDataP11objc_object
+_OBJC_METACLASS_$___ARCLite__
+__ZL24OBJC_CLASS_$___ARCLite__
+__ZL31OBJC_METACLASS_RO_$___ARCLite__
+__non_lazy_classes
+__ZL27OBJC_CLASS_RO_$___ARCLite__
+__ZL11_class_name
+__ZL32OBJC_$_CLASS_METHODS___ARCLite__
+__ZL17_load_method_name
+__ZL17_load_method_type
+__OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
+__OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+__ZL30NSUndoManagerProxy_targetClass
+__ZL29original_NSManagedObject_init
+__ZL40original_NSManagedObject_allocWithEntity
+__ZL35original_NSManagedObject_allocBatch
+__ZL25NSMutableDictionary_class
+__ZL22NSConstantString_class
+__ZL14NSString_class
+__ZL36original_NSKKMS_fastIndexForKnownKey
+__ZL27original_NSKKMS_indexForKey
+__ZL28original_NSKKsD_objectForKey
+__ZL34original_NSKKsD_removeObjectForKey
+__ZL32original_NSKKsD_setObject_forKey
+__ZL40original_NSKKsD_addEntriesFromDictionary
+__ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZGVZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZL31original_objc_allocateClassPair
+__ZL31original_object_getIndexedIvars
+__ZL22original_objc_getClass
+__ZL26original_objc_getMetaClass
+__ZL30original_objc_getRequiredClass
+__ZL25original_objc_lookUpClass
+__ZL25original_objc_getProtocol
+__ZL22original_class_getName
+__ZL25original_protocol_getName
+__ZL36original_objc_copyClassNamesForImage
+__ZL12demangleLock
+__ZL9Demangled
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ --target=arm64-apple-ios4.3 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -fno-sanitize=vptr -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-objc-interface-ivars -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -D OBJC_OLD_DISPATCH_PROTOTYPES=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.0.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -g -fno-threadsafe-statics -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body -fembed-bitcode=all -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources-normal/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.0.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -Wno-error=deprecated-declarations -Wno-error=documentation -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -Wno-error=deprecated-declarations -Wno-error=documentation -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-76/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.o -Wno-framework-include-private-from-public -Wno-atimport-in-framework-header -Wno-extra-semi-stmt -Wno-quoted-include-in-framework-header -mlinker-version=520
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-76/source/arclite.mm
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-76
+fixStringForCoreData
+source/arclite.mm
+cxxConstruct
+arclite_uninitialized_function
+scanMangledField
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.0.Internal.sdk/usr/include/_ctype.h
+__isctype
+demangledName
+copySwiftV1DemangledName
+copySwiftV1MangledName
+allocateMaybeSwift
+word_align
+isSwift
+initialize_imp
+transcribeProperties
+property_list_nth
+transcribeProtocols
+transcribeMethods
+data
+method_list_nth
+__arclite_objc_copyClassNamesForImage
+__arclite_protocol_getName
+__arclite_class_getName
+__arclite_objc_getProtocol
+__arclite_objc_lookUpClass
+__arclite_objc_getRequiredClass
+__arclite_objc_getMetaClass
+__arclite_objc_getClass
+__arclite_object_getIndexedIvars
+__arclite_objc_allocateClassPair
+metaclass
+__arclite_objc_readClassPair
+transcribeIvars
+ivar_list_nth
+max
+alignment
+ro
+fastFlags
+__arclite_NSKKsD_addEntriesFromDictionary
+__arclite_NSKKsD_setObject_forKey
+__arclite_NSKKsD_removeObjectForKey
+__arclite_NSKKsD_objectForKey
+__arclite_NSKKMS_indexForKey
+__arclite_NSKKMS_fastIndexForKnownKey
+__arclite_NSManagedObject_allocBatch
+__arclite_NSManagedObject_allocWithEntity
+__arclite_NSManagedObject_init
+__arclite_NSUndoManagerProxy_isKindOfClass
+add_image_hook_swiftV1
+patch_lazy_pointers
+patch_t<const char **(const char *, unsigned int *)>
+patch_t<const char *(Protocol *)>
+patch_t<const char *(Class)>
+patch_t<Protocol *(const char *)>
+patch_t<Class (const char *)>
+patch_t<void *(id)>
+patch_t<Class (Class, const char *, unsigned long)>
+patch_t<Class (Class, const objc_image_info *)>
+__arclite_NSMutableDictionary__setObject_forKeyedSubscript
+__ARCLite__load
+install_swiftV1
+replaceMethod
+install_dict_nil_value
+addOrReplaceMethod
+keyedGetter

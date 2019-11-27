@@ -1,0 +1,78 @@
+libs/**
+build/**
+tests/tools/splint/splbin/**
+tests/tools/splint/source/**
+tests/tools/splint/source/src/.deps/**
+**.o
+**.a
+**.so
+**.**~
+**.**#
+static_analysis.txt
+
+
+# iOS and OSX
+.DS_Store
+
+# TextMate noise
+*.tm_build_errors
+
+# Xcode noise, after https://github.com/github/gitignore/blob/master/Objective-C.gitignore
+# http://stackoverflow.com/a/12021580
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.moved-aside
+*~.nib
+*.swp
+*.xcworkspacedata
+
+# additional rules
+DerivedData/
+.idea/
+build
+.gradle
+
+
+# python rules
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+tests/phpthemis/vendor
+tests/phpthemis/composer.json
+tests/phpthemis/composer.phar
+tests/phpthemis/composer.lock
+
+third_party/boringssl/.externalNativeBuild
+
+# php
+
+*.lai
+*.la
+*.lo
+
+# ios
+docs/examples/Themis-server/swift/Pods
+docs/examples/Themis-server/Obj-C/Pods
+docs/examples/swift/iOS-CocoaPods/Pods
+docs/examples/objc/iOS-CocoaPods/Pods
+
+# Carthage
+Carthage/
+docs/examples/swift/iOS-Carthage/Carthage
+docs/examples/objc/iOS-Carthage/Carthage
+
+
+# rust
+/target
+**/*.rs.bk
+Cargo.lock
+
