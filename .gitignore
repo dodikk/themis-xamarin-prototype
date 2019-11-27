@@ -1,3 +1,8 @@
 ./lib-native/ios/Carthage/Build/Mac
 ./lib-native/ios/Carthage/Checkouts
 .gradle
+obj
+bin
+*.suo
+*.pdb
+.vs
