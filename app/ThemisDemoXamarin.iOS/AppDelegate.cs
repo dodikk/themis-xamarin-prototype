@@ -25,7 +25,22 @@ namespace ThemisDemoXamarin.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+            this.ExecuteThemisNativeSample();
+
             return base.FinishedLaunching(app, options);
+        }
+
+        private void ExecuteThemisNativeSample()
+        {
+            var masterKeyString =
+                new NSString("UkVDMgAAAC13PCVZAKOczZXUpvkhsC+xvwWnv3CLmlG0Wzy8ZBMnT+2yx/dg");
+
+            var masterKeyData =
+                new NSData(
+                    base64String: masterKeyString,
+                    options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters);
+
+            var cellSeal = new TSCellSeal(masterKeyData);
         }
     }
 }
