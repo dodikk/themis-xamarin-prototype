@@ -129,5 +129,9 @@
       <Project>{689365FF-B1E8-4278-8AE0-55B55301B604}</Project>
       <Name>ThemisDemoXamarin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\lib-bindings\themis\themis.ios\themis.ios.csproj">
+      <Project>{E94FC157-63E0-44FF-8E10-733278FC4686}</Project>
+      <Name>themis.ios</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

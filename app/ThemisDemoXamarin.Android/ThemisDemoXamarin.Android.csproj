@@ -92,6 +92,10 @@
       <Project>{689365FF-B1E8-4278-8AE0-55B55301B604}</Project>
       <Name>ThemisDemoXamarin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\lib-bindings\themis\themis.droid\themis.droid\themis.droid.csproj">
+      <Project>{EA3D6DD7-44E8-44C3-85AE-BE76F4C08993}</Project>
+      <Name>themis.droid</Name>
+    </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
