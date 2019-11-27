@@ -7,3 +7,4 @@ sharpie bind                                                         \
 #### Sharpie docs
 ## https://docs.microsoft.com/en-gb/xamarin/cross-platform/macios/binding/objective-sharpie/examples/cocoapod
 ## https://docs.microsoft.com/en-gb/xamarin/cross-platform/macios/binding/objective-sharpie/examples/advanced
+## https://docs.microsoft.com/en-us/xamarin/ios/platform/binding-objective-c/walkthrough
