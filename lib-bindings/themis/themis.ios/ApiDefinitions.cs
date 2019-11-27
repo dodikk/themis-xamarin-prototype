@@ -1,22 +1,22 @@
 using System;
 using Foundation;
 using ObjCRuntime;
-using themis;
+
 
 namespace Themis
 {
-	[Static]
-	[Verify (ConstantsInterfaceAssociation)]
-	partial interface Constants
-	{
-		// extern double themisVersionNumber;
-		[Field ("themisVersionNumber", "__Internal")]
-		double themisVersionNumber { get; }
+	//[Static]
+	//[Verify (ConstantsInterfaceAssociation)]
+	//partial interface Constants
+	//{
+	//	// extern double themisVersionNumber;
+	//	[Field ("themisVersionNumber", "__Internal")]
+	//	double themisVersionNumber { get; }
 
-		// extern const unsigned char [] themisVersionString;
-		[Field ("themisVersionString", "__Internal")]
-		byte[] themisVersionString { get; }
-	}
+	//	// extern const unsigned char [] themisVersionString;
+	//	[Field ("themisVersionString", "__Internal")]
+	//	byte[] themisVersionString { get; }
+	//}
 
 	// @interface TSCell : NSObject
 	[BaseType (typeof(NSObject))]
@@ -135,7 +135,7 @@ namespace Themis
 
 		// -(instancetype _Nullable)initWithAlgorithm:(TSKeyGenAsymmetricAlgorithm)algorithm;
 		[Export ("initWithAlgorithm:")]
-		IntPtr Constructor (TSKeyGenAsymmetricAlgorithm algorithm);
+		IntPtr Constructor (Themis.TSKeyGenAsymmetricAlgorithm algorithm);
 	}
 
 	// @interface TSMessage : NSObject
@@ -152,15 +152,19 @@ namespace Themis
 
 		// @property (readonly, nonatomic) TSMessageMode mode;
 		[Export ("mode")]
-		TSMessageMode Mode { get; }
+        Themis.TSMessageMode Mode { get; }
 
 		// -(instancetype _Nullable)initInEncryptModeWithPrivateKey:(NSData * _Nonnull)privateKey peerPublicKey:(NSData * _Nonnull)peerPublicKey;
 		[Export ("initInEncryptModeWithPrivateKey:peerPublicKey:")]
-		IntPtr Constructor (NSData privateKey, NSData peerPublicKey);
+		IntPtr InitInEncryptMode(// Constructor
+            NSData privateKey,
+            NSData peerPublicKey);
 
 		// -(instancetype _Nullable)initInSignVerifyModeWithPrivateKey:(NSData * _Nullable)privateKey peerPublicKey:(NSData * _Nullable)peerPublicKey;
 		[Export ("initInSignVerifyModeWithPrivateKey:peerPublicKey:")]
-		IntPtr Constructor ([NullAllowed] NSData privateKey, [NullAllowed] NSData peerPublicKey);
+		IntPtr InitInSignVerifyMode( // Constructor (
+            [NullAllowed] NSData privateKey,
+            [NullAllowed] NSData peerPublicKey);
 
 		// -(NSData * _Nullable)wrapData:(NSData * _Nullable)message error:(NSError * _Nullable * _Nullable)error;
 		[Export ("wrapData:error:")]
@@ -193,8 +197,7 @@ namespace Themis
 
 		// -(TSComparatorStateType)status;
 		[Export ("status")]
-		[Verify (MethodToProperty)]
-		TSComparatorStateType Status { get; }
+        Themis.TSComparatorStateType Status { get; }
 	}
 
 	// @interface TSSessionTransportInterface : NSObject
@@ -216,9 +219,9 @@ namespace Themis
 		NSData PublicKeyFor ([NullAllowed] NSData binaryId, [NullAllowed] out NSError error);
 
 		// -(secure_session_user_callbacks_t * _Nonnull)callbacks;
-		[Export ("callbacks")]
-		[Verify (MethodToProperty)]
-		unsafe secure_session_user_callbacks_t* Callbacks { get; }
+		//[Export ("callbacks")]
+		//[Verify (MethodToProperty)]
+		//unsafe secure_session_user_callbacks_t* Callbacks { get; }
 	}
 
 	// @interface TSSession : NSObject
@@ -259,7 +262,6 @@ namespace Themis
 
 		// -(BOOL)isSessionEstablished;
 		[Export ("isSessionEstablished")]
-		[Verify (MethodToProperty)]
 		bool IsSessionEstablished { get; }
 	}
 }
