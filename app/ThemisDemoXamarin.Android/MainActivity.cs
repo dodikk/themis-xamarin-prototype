@@ -41,7 +41,7 @@ namespace ThemisDemoXamarin.Droid
             string masterKeyString = "UkVDMgAAAC13PCVZAKOczZXUpvkhsC+xvwWnv3CLmlG0Wzy8ZBMnT+2yx/dg";
             var secureCell = new SecureCell(masterKeyString);
 
-            string plainTextMessage = "[themis demo] Droid binding plain text message";
+            string plainTextMessage = "Droid binding plain text message";
             Console.WriteLine($"[themis demo] Initial Text: {plainTextMessage}");
 
             
@@ -53,6 +53,9 @@ namespace ThemisDemoXamarin.Droid
                     .ToCharArray()
                     .Select((ch) => (byte)ch)
                     .ToArray();
+            string plainTextBase64 = Convert.ToBase64String(plainTextMessageData);
+            Console.WriteLine($"[themis demo] Initial Text base64: {plainTextBase64}");
+
 
             SecureCellData cypherTextHolder =
                 secureCell.Protect(
@@ -65,6 +68,7 @@ namespace ThemisDemoXamarin.Droid
             // -
             byte[] cypherText = cypherTextHolder.GetProtectedData();
             char[] cypherTextChars = cypherText.Select(b => (char)b).ToArray();
+            string cypherTextBase64 = Convert.ToBase64String(cypherText);
 
             string txtCypherText =
                 new string(
@@ -72,18 +76,22 @@ namespace ThemisDemoXamarin.Droid
                     startIndex: 0,
                     length: cypherTextChars.Length);
             Console.WriteLine($"[themis demo] Cypher Text: {txtCypherText}");
+            Console.WriteLine($"[themis demo] Cypher Text base64: {cypherTextBase64}");
 
 
             byte[] decryptedData = secureCell.Unprotect(
                 context: "no context",
                 protectedData: cypherTextHolder);
             char[] decryptedDataChars = decryptedData.Select(b => (char)b).ToArray();
+            string decryptedDataBase64 = Convert.ToBase64String(decryptedData);
+
             string decryptedText =
                 new string(
                     value: decryptedDataChars,
                     startIndex: 0,
                     length: decryptedDataChars.Length);
             Console.WriteLine($"[themis demo] Decrypted Text: {decryptedText}");
+            Console.WriteLine($"[themis demo] Decrypted Text base64: {decryptedDataBase64}");
         }
     }
 }
