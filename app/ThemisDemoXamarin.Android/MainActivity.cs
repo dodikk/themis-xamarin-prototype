@@ -41,12 +41,12 @@ namespace ThemisDemoXamarin.Droid
             string masterKeyString = "UkVDMgAAAC13PCVZAKOczZXUpvkhsC+xvwWnv3CLmlG0Wzy8ZBMnT+2yx/dg";
             var secureCell = new SecureCell(masterKeyString);
 
-            string plainTextMessage = "Droid binding plain text message";
-            Console.WriteLine($"Initial Text: {plainTextMessage}");
+            string plainTextMessage = "[themis demo] Droid binding plain text message";
+            Console.WriteLine($"[themis demo] Initial Text: {plainTextMessage}");
 
             
 
-            Console.WriteLine("Encrypting...");
+            Console.WriteLine("[themis demo] Encrypting...");
 
             byte[] plainTextMessageData =
                 plainTextMessage
@@ -59,7 +59,7 @@ namespace ThemisDemoXamarin.Droid
                     context: "no context",
                     data: plainTextMessageData);
 
-            Console.WriteLine("Done.");
+            Console.WriteLine("[themis demo] Done.");
 
             // convert cyphertext for printing
             // -
@@ -71,7 +71,7 @@ namespace ThemisDemoXamarin.Droid
                     value: cypherTextChars,
                     startIndex: 0,
                     length: cypherTextChars.Length);
-            Console.WriteLine($"Cypher Text: {txtCypherText}");
+            Console.WriteLine($"[themis demo] Cypher Text: {txtCypherText}");
 
 
             byte[] decryptedData = secureCell.Unprotect(
@@ -83,7 +83,7 @@ namespace ThemisDemoXamarin.Droid
                     value: decryptedDataChars,
                     startIndex: 0,
                     length: decryptedDataChars.Length);
-            Console.WriteLine($"Decrypted Text: {decryptedText}");
+            Console.WriteLine($"[themis demo] Decrypted Text: {decryptedText}");
         }
     }
 }
