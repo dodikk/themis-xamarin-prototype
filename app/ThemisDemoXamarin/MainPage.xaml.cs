@@ -36,45 +36,68 @@ namespace ThemisDemoXamarin
                     .Select((ch) => (byte)ch)
                     .ToArray();
 
-            ICellSeal cellSeal = cellSealBuilder.BuildCellSealForMasterKey(masterKeyData: masterKeyData);
+            using (ICellSeal cellSeal = cellSealBuilder.BuildCellSealForMasterKey(masterKeyData: masterKeyData))
+            {
+
+                // print plain text
+                // ===
+                byte[] plainTextMessageData =
+                    plainTextMessage
+                        .ToCharArray()
+                        .Select((ch) => (byte)ch)
+                        .ToArray();
+                string plainTextBase64 = Convert.ToBase64String(plainTextMessageData);
+                Console.WriteLine($"[themis demo forms] Initial Text: {plainTextMessage}");
+                Console.WriteLine($"[themis demo forms] Initial Text base64: {plainTextBase64}");
 
 
-            byte[] plainTextMessageData =
-                plainTextMessage
-                    .ToCharArray()
-                    .Select((ch) => (byte)ch)
-                    .ToArray();
-            string plainTextBase64 = Convert.ToBase64String(plainTextMessageData);
-            Console.WriteLine($"[themis demo forms] Initial Text base64: {plainTextBase64}");
+                // encrypt
+                // ===
+                Console.WriteLine("[themis demo forms] Encrypting...");
+                using (ISecureCellData cypherText =
+                    cellSeal.WrapData(
+                        plainTextData: masterKeyData,
+                        context: null))
+                {
+
+                    Console.WriteLine("[themis demo forms] Done.");
 
 
-            Console.WriteLine("[themis demo forms] Encrypting...");
-            ISecureCellData cypherText =
-                cellSeal.WrapData(
-                    plainTextData: masterKeyData,
-                    context: null);
+                    // print encrypted data
+                    // ====
+                    byte[] encryptedData = cypherText.GetEncryptedData();
+                    char[] cypherTextChars = encryptedData.Select(b => (char)b).ToArray();
+                    string cypherTextBase64 = Convert.ToBase64String(encryptedData);
 
-            Console.WriteLine("[themis demo forms] Done.");
+                    string txtCypherText =
+                        new string(
+                            value: cypherTextChars,
+                            startIndex: 0,
+                            length: cypherTextChars.Length);
+                    Console.WriteLine($"[themis demo forms] Cypher Text: {txtCypherText}");
+                    Console.WriteLine($"[themis demo forms] Cypher Text base64: {cypherTextBase64}");
 
 
-            // TODO: print encrypted data
-            // ====
 
-            byte[] decryptedData =
-                cellSeal.UnwrapData(
-                    cypherTextData: cypherText,
-                    context: null);
-            char[] decryptedDataChars = decryptedData.Select(b => (char)b).ToArray();
-            string decryptedDataBase64 = Convert.ToBase64String(decryptedData);
+                    // decrypt and print
+                    // ===
+                    byte[] decryptedData =
+                        cellSeal.UnwrapData(
+                            cypherTextData: cypherText,
+                            context: null);
+                    char[] decryptedDataChars = decryptedData.Select(b => (char)b).ToArray();
+                    string decryptedDataBase64 = Convert.ToBase64String(decryptedData);
 
-            string decryptedText =
-                new string(
-                    value: decryptedDataChars,
-                    startIndex: 0,
-                    length: decryptedDataChars.Length);
+                    string decryptedText =
+                        new string(
+                            value: decryptedDataChars,
+                            startIndex: 0,
+                            length: decryptedDataChars.Length);
 
-            Console.WriteLine($"[themis demo] Decrypted Text: {decryptedText}");
-            Console.WriteLine($"[themis demo] Decrypted Text base64: {decryptedDataBase64}");
+                    Console.WriteLine($"[themis demo forms] Decrypted Text: {decryptedText}");
+                    Console.WriteLine($"[themis demo forms] Decrypted Text base64: {decryptedDataBase64}");
+                }
+            }
         }
     }
 }
