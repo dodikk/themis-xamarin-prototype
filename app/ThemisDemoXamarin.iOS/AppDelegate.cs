@@ -1,7 +1,7 @@
 ﻿using System;
 using Foundation;
 using UIKit;
-using Themis; // a namespace from the binding project
+using Themis.iOS; // a namespace from the binding project
 
 
 namespace ThemisDemoXamarin.iOS

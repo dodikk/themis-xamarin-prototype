@@ -3,7 +3,7 @@ using Foundation;
 using ObjCRuntime;
 
 
-namespace Themis
+namespace Themis.iOS
 {
 	//[Static]
 	//[Verify (ConstantsInterfaceAssociation)]
@@ -135,7 +135,7 @@ namespace Themis
 
 		// -(instancetype _Nullable)initWithAlgorithm:(TSKeyGenAsymmetricAlgorithm)algorithm;
 		[Export ("initWithAlgorithm:")]
-		IntPtr Constructor (Themis.TSKeyGenAsymmetricAlgorithm algorithm);
+		IntPtr Constructor (Themis.iOS.TSKeyGenAsymmetricAlgorithm algorithm);
 	}
 
 	// @interface TSMessage : NSObject
@@ -152,7 +152,7 @@ namespace Themis
 
 		// @property (readonly, nonatomic) TSMessageMode mode;
 		[Export ("mode")]
-        Themis.TSMessageMode Mode { get; }
+        Themis.iOS.TSMessageMode Mode { get; }
 
 		// -(instancetype _Nullable)initInEncryptModeWithPrivateKey:(NSData * _Nonnull)privateKey peerPublicKey:(NSData * _Nonnull)peerPublicKey;
 		[Export ("initInEncryptModeWithPrivateKey:peerPublicKey:")]
@@ -197,7 +197,7 @@ namespace Themis
 
 		// -(TSComparatorStateType)status;
 		[Export ("status")]
-        Themis.TSComparatorStateType Status { get; }
+        Themis.iOS.TSComparatorStateType Status { get; }
 	}
 
 	// @interface TSSessionTransportInterface : NSObject
