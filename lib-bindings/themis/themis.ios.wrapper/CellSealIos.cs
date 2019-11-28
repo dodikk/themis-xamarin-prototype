@@ -85,9 +85,8 @@ namespace Themis.iOS
 
             if (null != themisError)
             {
-                throw new ArgumentException(
-                    message: $"Error decrypting data with themis: {themisError.LocalizedDescription}",
-                    paramName: nameof(cypherTextData));
+                throw new ThemisXamarinBridgeException(
+                    message: $"NSError decrypting data with themis: {themisError.LocalizedDescription}");
             }
 
             using (MemoryStream ms = new MemoryStream())
@@ -138,9 +137,8 @@ namespace Themis.iOS
 
             if (null != themisError)
             {
-                throw new ArgumentException(
-                    message: $"Error encrypting data with themis: {themisError.LocalizedDescription}",
-                    paramName: nameof(plainTextData));
+                throw new ThemisXamarinBridgeException(
+                    message: $"NSError encrypting data with themis: {themisError.LocalizedDescription}");
             }
 
             var result =
