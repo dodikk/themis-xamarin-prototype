@@ -4,7 +4,11 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Xamarin.Forms;
+
 using Com.Cossacklabs.Themis;
+using Themis;
+using Themis.Droid;
 
 
 namespace ThemisDemoXamarin.Droid
@@ -14,6 +18,12 @@ namespace ThemisDemoXamarin.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            // for Xamarin.Forms managed code demo in MainPage.xaml.cs
+            // -
+            DependencyService.Register<ICellSealBuilder, CellSealBuilderDroid>();
+
+            // Xamarin.Android demo
+            // -
             ExecuteThemisNativeSample();
 
             TabLayoutResource = Resource.Layout.Tabbar;

@@ -1,6 +1,6 @@
 using ObjCRuntime;
 
-namespace Themis
+namespace Themis.iOS
 {
 	[Native]
 	public enum TSKeyGenAsymmetricAlgorithm : long

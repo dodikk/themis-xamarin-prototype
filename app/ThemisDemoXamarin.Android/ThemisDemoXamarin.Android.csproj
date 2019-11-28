@@ -96,6 +96,14 @@
       <Project>{EA3D6DD7-44E8-44C3-85AE-BE76F4C08993}</Project>
       <Name>themis.droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\lib-bindings\themis\themis.pcl\themis.pcl.csproj">
+      <Project>{043CE410-3CE8-4C55-9D2D-E7C883DC31BC}</Project>
+      <Name>themis.pcl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib-bindings\themis\themis.droid.wrapper\themis.droid.wrapper.csproj">
+      <Project>{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}</Project>
+      <Name>themis.droid.wrapper</Name>
+    </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -1,8 +1,9 @@
 ﻿using System;
 using Foundation;
 using UIKit;
-using Themis; // a namespace from the binding project
-
+using Themis;
+using Themis.iOS; // a namespace from the binding project
+using Xamarin.Forms;
 
 namespace ThemisDemoXamarin.iOS
 {
@@ -21,10 +22,16 @@ namespace ThemisDemoXamarin.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            // for Xamarin.Forms managed code demo in MainPage.xaml.cs
+            // -
+            DependencyService.Register<ICellSealBuilder, CellSealBuilderIos>();
+
+            // Xamarin.iOS demo
+            // -
+            this.ExecuteThemisNativeSample();
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
-            this.ExecuteThemisNativeSample();
 
             return base.FinishedLaunching(app, options);
         }
