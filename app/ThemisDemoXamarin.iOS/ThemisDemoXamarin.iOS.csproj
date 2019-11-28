@@ -133,5 +133,9 @@
       <Project>{E94FC157-63E0-44FF-8E10-733278FC4686}</Project>
       <Name>themis.ios</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\lib-bindings\themis\themis.ios.wrapper\themis.ios.wrapper.csproj">
+      <Project>{7F22285B-145C-439C-9E4E-790DEE9612D4}</Project>
+      <Name>themis.ios.wrapper</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

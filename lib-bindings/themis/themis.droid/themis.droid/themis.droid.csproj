@@ -57,6 +57,12 @@
       <Link>Jars\themis-0.12.0.aar</Link>
     </LibraryProjectZip>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\themis.pcl\themis.pcl.csproj">
+      <Project>{043CE410-3CE8-4C55-9D2D-E7C883DC31BC}</Project>
+      <Name>themis.pcl</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

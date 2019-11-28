@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "themis.droid", "..\lib-bind
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "themis.pcl", "..\lib-bindings\themis\themis.pcl\themis.pcl.csproj", "{043CE410-3CE8-4C55-9D2D-E7C883DC31BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "themis.ios.wrapper", "..\lib-bindings\themis\themis.ios.wrapper\themis.ios.wrapper.csproj", "{7F22285B-145C-439C-9E4E-790DEE9612D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,18 @@ Global
 		{043CE410-3CE8-4C55-9D2D-E7C883DC31BC}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{043CE410-3CE8-4C55-9D2D-E7C883DC31BC}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{043CE410-3CE8-4C55-9D2D-E7C883DC31BC}.Release|iPhone.Build.0 = Release|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{689365FF-B1E8-4278-8AE0-55B55301B604} = {85488F99-3F03-4846-BE13-E137636E9726}
@@ -107,5 +121,6 @@ Global
 		{E94FC157-63E0-44FF-8E10-733278FC4686} = {D8B5EB16-B204-412D-88DB-3AC987353459}
 		{EA3D6DD7-44E8-44C3-85AE-BE76F4C08993} = {D8B5EB16-B204-412D-88DB-3AC987353459}
 		{043CE410-3CE8-4C55-9D2D-E7C883DC31BC} = {D8B5EB16-B204-412D-88DB-3AC987353459}
+		{7F22285B-145C-439C-9E4E-790DEE9612D4} = {D8B5EB16-B204-412D-88DB-3AC987353459}
 	EndGlobalSection
 EndGlobal
