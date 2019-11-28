@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using System.IO;
+using Foundation;
 
 
 namespace Themis.iOS
@@ -25,6 +26,16 @@ namespace Themis.iOS
                 }
 
                 _cypherText = null;
+            }
+        }
+
+        public byte[] GetEncryptedData()
+        {
+            using (MemoryStream ms = new MemoryStream())
+            using (Stream nsDataStream = _cypherText.AsStream())
+            {
+                nsDataStream.CopyTo(ms);
+                return ms.ToArray();
             }
         }
 
