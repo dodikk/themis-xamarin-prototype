@@ -7,16 +7,35 @@ namespace Themis.Droid
     {
         public CellSealDroid(byte[] masterKeyData)
         {
-            _secureCell = new SecureCell(key: masterKeyData);
+            try
+            {
+                _secureCell = new SecureCell(key: masterKeyData);
+            }
+            catch (Exception ex)
+            {
+                throw new ThemisXamarinBridgeException(
+                    message: "[FAIL] [droid] SecureCell java constructor failed",
+                    inner: ex);
+            }
         }
 
         public void Dispose()
         {
-            if (null != _secureCell)
+            try
             {
-                _secureCell.Dispose();
-                _secureCell = null;
+                if (null != _secureCell)
+                {
+                    _secureCell.Dispose();
+                    _secureCell = null;
+                }
             }
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+            catch
+            {
+                // Suppressing.
+                // A destructor must never throw
+            }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
         }
 
         public byte[] UnwrapData(ISecureCellData cypherTextData, byte[] context = null)
@@ -29,24 +48,42 @@ namespace Themis.Droid
                     paramName: nameof(cypherTextData));
             }
 
-            byte[] result = 
-                _secureCell.Unprotect(
-                    context: context,
-                    protectedData: castedCypherTextData.SecureCellDataJava);
+            try
+            {
+                byte[] result =
+                    _secureCell.Unprotect(
+                        context: context,
+                        protectedData: castedCypherTextData.SecureCellDataJava);
 
-            return result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new ThemisXamarinBridgeException(
+                    message: "[FAIL] [droid] SecureCell.Unprotect() java method failed",
+                    inner: ex);
+            }
         }
 
         public ISecureCellData WrapData(byte[] plainTextData, byte[] context = null)
         {
-            SecureCellData cypherTextHandle =
-                _secureCell.Protect(
-                    context: context,
-                    data: plainTextData);
+            try
+            {
+                SecureCellData cypherTextHandle =
+                    _secureCell.Protect(
+                        context: context,
+                        data: plainTextData);
 
-            var result = new SecureCellDataDroid(cypherTextHandle);
+                var result = new SecureCellDataDroid(cypherTextHandle);
 
-            return result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new ThemisXamarinBridgeException(
+                    message: "[FAIL] [droid] SecureCell.Protect() java method failed",
+                    inner: ex);
+            }
         }
 
         private SecureCell _secureCell;

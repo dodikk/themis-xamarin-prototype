@@ -14,17 +14,36 @@ namespace Themis.Droid
 
         public void Dispose()
         {
-            if (null != _cypherTextHandle)
+            try
             {
-                _cypherTextHandle.Dispose();
-                _cypherTextHandle = null;
+                if (null != _cypherTextHandle)
+                {
+                    _cypherTextHandle.Dispose();
+                    _cypherTextHandle = null;
+                }
             }
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+            catch
+            {
+                // Suppressing.
+                // A destructor must never throw
+            }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
         }
 
         public byte[] GetEncryptedData()
         {
-            byte[] result = _cypherTextHandle.GetProtectedData();
-            return result;
+            try
+            {
+                byte[] result = _cypherTextHandle.GetProtectedData();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new ThemisXamarinBridgeException(
+                    message: "[FAIL] [droid] SecureCellData.GetProtectedData() java method failed",
+                    inner: ex);
+            }
         }
 
         private SecureCellData _cypherTextHandle;

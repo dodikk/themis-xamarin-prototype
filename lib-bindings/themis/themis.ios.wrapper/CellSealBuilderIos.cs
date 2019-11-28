@@ -9,15 +9,28 @@ namespace Themis
     {
         public ICellSeal BuildCellSealForMasterKey(byte[] masterKeyData)
         {
-            string masterKeyBase64 = Convert.ToBase64String(masterKeyData);
-            NSData nsMasterKeyData =
-                new NSData(
-                    base64String: masterKeyBase64,
-                    options: NSDataBase64DecodingOptions.None);
+            try
+            {
+                string masterKeyBase64 = Convert.ToBase64String(masterKeyData);
+                NSData nsMasterKeyData =
+                    new NSData(
+                        base64String: masterKeyBase64,
+                        options: NSDataBase64DecodingOptions.None);
 
-            var result = new CellSealIos(masterKeyData: nsMasterKeyData);
+                var result = new CellSealIos(masterKeyData: nsMasterKeyData);
 
-            return result;
+                return result;
+            }
+            catch (ThemisXamarinBridgeException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new ThemisXamarinBridgeException(
+                    message: "[FAIL] [iOS] CellSealBuilderIos.BuildCellSealForMasterKey()",
+                    inner: ex);
+            }
         }
     }
 }

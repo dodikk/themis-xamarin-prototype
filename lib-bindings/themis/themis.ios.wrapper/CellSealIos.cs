@@ -9,17 +9,36 @@ namespace Themis.iOS
     {
         public void Dispose()
         {
-            if (_implCellSeal != null)
+            try
             {
-                _implCellSeal.Dispose();
-                _implCellSeal = null;
+                if (_implCellSeal != null)
+                {
+                    _implCellSeal.Dispose();
+                    _implCellSeal = null;
 
+                }
             }
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+            catch
+            {
+                // Suppressing.
+                // A destructor must never throw
+            }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
         }
 
         public CellSealIos(NSData masterKeyData)
         {
-            _implCellSeal = new TSCellSeal(masterKeyData);
+            try
+            {
+                _implCellSeal = new TSCellSeal(masterKeyData);
+            }
+            catch (Exception ex)
+            {
+                throw new ThemisXamarinBridgeException(
+                    message: "TSCellSeal constructor has failed",
+                    inner: ex);
+            }
         }
 
         public byte[] UnwrapData(
@@ -45,12 +64,24 @@ namespace Themis.iOS
                         options: NSDataBase64DecodingOptions.None);
             }
 
-            NSError themisError;
-            NSData plainTextData =
-                _implCellSeal.UnwrapData(
-                    message: castedCypherTextData.CypherText,
-                    context: nsContextData,
-                    error: out themisError);
+
+            NSError themisError = null;
+            NSData plainTextData = null;
+            try
+            {
+                plainTextData =
+                    _implCellSeal.UnwrapData(
+                        message: castedCypherTextData.CypherText,
+                        context: nsContextData,
+                        error: out themisError);
+            }
+            catch (Exception ex)
+            {
+                throw new ThemisXamarinBridgeException(
+                    message: "TSCellSeal.UnwrapData() has failed",
+                    inner: ex);
+            }
+
 
             if (null != themisError)
             {
@@ -89,11 +120,21 @@ namespace Themis.iOS
                         options: NSDataBase64DecodingOptions.None);
             }
 
-            NSData cypherText =
-            _implCellSeal.WrapData(
-                message: nsPlainTextData,
-                context: nsContextData,
-                error: out themisError);
+            NSData cypherText = null;
+            try
+            {
+                cypherText =
+                _implCellSeal.WrapData(
+                    message: nsPlainTextData,
+                    context: nsContextData,
+                    error: out themisError);
+            }
+            catch (Exception ex)
+            {
+                throw new ThemisXamarinBridgeException(
+                    message: "TSCellSeal.WrapData() has failed",
+                    inner: ex);
+            }
 
             if (null != themisError)
             {

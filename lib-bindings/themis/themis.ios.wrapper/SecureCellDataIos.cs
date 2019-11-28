@@ -18,15 +18,25 @@ namespace Themis.iOS
 
         public void Dispose()
         {
-            if (null != _cypherText)
+            try
             {
-                if (_shouldConsumeCypherTextObject)
+                if (null != _cypherText)
                 {
-                    _cypherText.Dispose();
-                }
+                    if (_shouldConsumeCypherTextObject)
+                    {
+                        _cypherText.Dispose();
+                    }
 
-                _cypherText = null;
+                    _cypherText = null;
+                }
             }
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+            catch
+            {
+                // Suppressing.
+                // A destructor must never throw
+            }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
         }
 
         public byte[] GetEncryptedData()
