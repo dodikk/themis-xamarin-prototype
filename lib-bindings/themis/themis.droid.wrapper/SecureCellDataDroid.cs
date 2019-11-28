@@ -1,22 +1,32 @@
 ﻿using System;
-
+using Com.Cossacklabs.Themis;
 
 namespace Themis.Droid
 {
     public class SecureCellDataDroid: ISecureCellData
     {
-        public SecureCellDataDroid()
+        public SecureCellData SecureCellDataJava => _cypherTextHandle;
+
+        public SecureCellDataDroid(SecureCellData cypherTextHandle)
         {
+            _cypherTextHandle = cypherTextHandle;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (null != _cypherTextHandle)
+            {
+                _cypherTextHandle.Dispose();
+                _cypherTextHandle = null;
+            }
         }
 
         public byte[] GetEncryptedData()
         {
-            throw new NotImplementedException();
+            byte[] result = _cypherTextHandle.GetProtectedData();
+            return result;
         }
+
+        private SecureCellData _cypherTextHandle;
     }
 }

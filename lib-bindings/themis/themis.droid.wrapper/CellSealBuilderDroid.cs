@@ -5,13 +5,10 @@ namespace Themis.Droid
 {
     public class CellSealBuilderDroid: ICellSealBuilder
     {
-        public CellSealBuilderDroid()
-        {
-        }
-
         public ICellSeal BuildCellSealForMasterKey(byte[] masterKeyData)
         {
-            throw new NotImplementedException();
+            var result = new CellSealDroid(masterKeyData);
+            return result;
         }
     }
 }
