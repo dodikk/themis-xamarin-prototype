@@ -12,8 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\lib-bindings\themis\themis.pcl\themis.pcl.csproj">
-      <Project>{043CE410-3CE8-4C55-9D2D-E7C883DC31BC}</Project>
-      <Name>themis.pcl</Name>
     </ProjectReference>
   </ItemGroup>
 

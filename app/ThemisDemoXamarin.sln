@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "themis.pcl", "..\lib-bindin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "themis.ios.wrapper", "..\lib-bindings\themis\themis.ios.wrapper\themis.ios.wrapper.csproj", "{7F22285B-145C-439C-9E4E-790DEE9612D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "themis.droid.wrapper", "..\lib-bindings\themis\themis.droid.wrapper\themis.droid.wrapper.csproj", "{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,18 @@ Global
 		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{7F22285B-145C-439C-9E4E-790DEE9612D4}.Release|iPhone.Build.0 = Release|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{689365FF-B1E8-4278-8AE0-55B55301B604} = {85488F99-3F03-4846-BE13-E137636E9726}
@@ -122,5 +136,6 @@ Global
 		{EA3D6DD7-44E8-44C3-85AE-BE76F4C08993} = {D8B5EB16-B204-412D-88DB-3AC987353459}
 		{043CE410-3CE8-4C55-9D2D-E7C883DC31BC} = {D8B5EB16-B204-412D-88DB-3AC987353459}
 		{7F22285B-145C-439C-9E4E-790DEE9612D4} = {D8B5EB16-B204-412D-88DB-3AC987353459}
+		{A6264E6D-0063-4FCD-8BD6-4BCB2A5675F6} = {D8B5EB16-B204-412D-88DB-3AC987353459}
 	EndGlobalSection
 EndGlobal
