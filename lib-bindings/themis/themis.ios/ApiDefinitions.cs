@@ -20,8 +20,8 @@ namespace Themis.iOS
 
 	// @interface TSCell : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSCell
-	{
+	interface TSCell : IDisposable, INativeObject, INSObjectProtocol
+    {
 		// @property (readonly, nonatomic) NSData * _Nonnull key;
 		[Export ("key")]
 		NSData Key { get; }
@@ -33,7 +33,7 @@ namespace Themis.iOS
 
 	// @interface TSCellSeal : TSCell
 	[BaseType (typeof(TSCell))]
-	interface TSCellSeal
+	interface TSCellSeal: IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(instancetype _Nullable)initWithKey:(NSData * _Nonnull)key;
 		[Export ("initWithKey:")]
