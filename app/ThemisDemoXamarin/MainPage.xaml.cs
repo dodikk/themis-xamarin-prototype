@@ -56,7 +56,7 @@ namespace ThemisDemoXamarin
                 Console.WriteLine("[themis demo forms] Encrypting...");
                 using (ISecureCellData cypherText =
                     cellSeal.WrapData(
-                        plainTextData: masterKeyData,
+                        plainTextData: plainTextMessageData,
                         context: null))
                 {
 
