@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Com.Cossacklabs.Themis;
 
 namespace Themis.Droid
@@ -7,6 +8,8 @@ namespace Themis.Droid
     {
         public CellSealDroid(byte[] masterKeyData)
         {
+            if (masterKeyData == null) throw new ArgumentNullException(nameof(masterKeyData));
+
             try
             {
                 _secureCell = new SecureCell(key: masterKeyData);
@@ -23,7 +26,7 @@ namespace Themis.Droid
         {
             try
             {
-                if (null != _secureCell)
+                if (_secureCell != null)
                 {
                     _secureCell.Dispose();
                     _secureCell = null;
@@ -38,13 +41,17 @@ namespace Themis.Droid
 #pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
         }
 
-        public byte[] UnwrapData(ISecureCellData cypherTextData, byte[] context = null)
+        public byte[] UnwrapData(
+            ISecureCellData cypherTextData,
+            byte[] context = null)
         {
+            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+
             var castedCypherTextData = cypherTextData as SecureCellDataDroid;
-            if (null == castedCypherTextData)
+            if (castedCypherTextData == null)
             {
                 throw new ArgumentException(
-                    message: $"Type mismatch: {cypherTextData.GetType()} received. Expecterd: {typeof(SecureCellDataDroid)}",
+                    message: $"Type mismatch: {cypherTextData.GetType()} received. Expected: {typeof(SecureCellDataDroid)}",
                     paramName: nameof(cypherTextData));
             }
 
@@ -65,8 +72,12 @@ namespace Themis.Droid
             }
         }
 
-        public ISecureCellData WrapData(byte[] plainTextData, byte[] context = null)
+        public ISecureCellData WrapData(
+            byte[] plainTextData,
+            byte[] context = null)
         {
+            if (plainTextData == null) throw new ArgumentNullException(nameof(plainTextData));
+
             try
             {
                 SecureCellData cypherTextHandle =
@@ -84,6 +95,37 @@ namespace Themis.Droid
                     message: "[FAIL] [droid] SecureCell.Protect() java method failed",
                     inner: ex);
             }
+        }
+
+        public ISecureCellData WrapDataStream(
+            Stream plainTextStream,
+            Stream contextStream = null)
+        {
+            if (plainTextStream == null) throw new ArgumentNullException(nameof(plainTextStream));
+
+            byte[] plainTextBytes = ConvertUtilsPortable.StreamToByteArray(plainTextStream);
+            byte[] contextBytes = ConvertUtilsPortable.StreamToByteArray(contextStream);
+
+            var result =
+                WrapData(
+                    plainTextData: plainTextBytes,
+                    context: contextBytes);
+
+            return result;
+        }
+
+        public Stream UnwrapDataAsStream(
+            ISecureCellData cypherTextData,
+            Stream contextStream = null)
+        {
+            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+
+            byte[] contextBytes = ConvertUtilsPortable.StreamToByteArray(contextStream);
+            byte[] resultBytes = UnwrapData(cypherTextData, context: contextBytes);
+
+            var result = ConvertUtilsPortable.ByteArrayToMemoryStream(resultBytes);
+
+            return result;
         }
 
         private SecureCell _secureCell;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using Foundation;
-
+using Themis.iOS.Utils;
 
 namespace Themis.iOS
 {
@@ -29,6 +29,8 @@ namespace Themis.iOS
 
         public CellSealIos(NSData masterKeyData)
         {
+            if (masterKeyData == null) throw new ArgumentNullException(nameof(masterKeyData));
+
             try
             {
                 _implCellSeal = new TSCellSeal(masterKeyData);
@@ -45,24 +47,18 @@ namespace Themis.iOS
             ISecureCellData cypherTextData,
             byte[] context = null)
         {
+            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+
             var castedCypherTextData = cypherTextData as SecureCellDataIos;
             if (null == castedCypherTextData)
             {
                 throw new ArgumentException(
-                    message: $"Type mismatch: {cypherTextData.GetType()} received. Expecterd: {typeof(SecureCellDataIos)}",
+                    message: $"Type mismatch: {cypherTextData.GetType()} received. Expected: {typeof(SecureCellDataIos)}",
                     paramName: nameof(cypherTextData));
             }
 
 
-            NSData nsContextData = null;
-            if (null != context)
-            {
-                string base64ContextData = Convert.ToBase64String(context);
-                nsContextData =
-                    new NSData(
-                        base64String: base64ContextData,
-                        options: NSDataBase64DecodingOptions.None);
-            }
+            NSData nsContextData = ConvertUtilsIos.ByteArrayToNSData(context);
 
 
             NSError themisError = null;
@@ -83,50 +79,36 @@ namespace Themis.iOS
             }
 
 
-            if (null != themisError)
+            if (themisError != null)
             {
                 throw new ThemisXamarinBridgeException(
                     message: $"NSError decrypting data with themis: {themisError.LocalizedDescription}");
             }
 
-            using (MemoryStream ms = new MemoryStream())
-            using (Stream nsDataStream = plainTextData.AsStream())
-            {
-                nsDataStream.CopyTo(ms);
-                return ms.ToArray();
-            }
+            byte[] result = ConvertUtilsIos.NSDataToByteArray(plainTextData);
+            return result;
         }
 
         public ISecureCellData WrapData(
             byte[] plainTextData,
             byte[] context = null)
         {
-            NSError themisError;
+            if (plainTextData == null) throw new ArgumentNullException(nameof(plainTextData));
 
-            string base64PlainText = Convert.ToBase64String(plainTextData);
-            NSData nsPlainTextData =
-                new NSData(
-                    base64String: base64PlainText,
-                    options: NSDataBase64DecodingOptions.None);
-
-            NSData nsContextData = null;
-            if (null != context)
-            {
-                string base64ContextData = Convert.ToBase64String(context);
-                nsContextData =
-                    new NSData(
-                        base64String: base64ContextData,
-                        options: NSDataBase64DecodingOptions.None);
-            }
-
+            NSError themisError = null;
             NSData cypherText = null;
+
+            NSData nsPlainTextData = ConvertUtilsIos.ByteArrayToNSData(plainTextData);
+            NSData nsContextData = ConvertUtilsIos.ByteArrayToNSData(context);
+
+            
             try
             {
                 cypherText =
-                _implCellSeal.WrapData(
-                    message: nsPlainTextData,
-                    context: nsContextData,
-                    error: out themisError);
+                    _implCellSeal.WrapData(
+                        message: nsPlainTextData,
+                        context: nsContextData,
+                        error: out themisError);
             }
             catch (Exception ex)
             {
@@ -135,7 +117,7 @@ namespace Themis.iOS
                     inner: ex);
             }
 
-            if (null != themisError)
+            if (themisError != null)
             {
                 throw new ThemisXamarinBridgeException(
                     message: $"NSError encrypting data with themis: {themisError.LocalizedDescription}");
@@ -148,6 +130,38 @@ namespace Themis.iOS
 
             return result;
         }
+
+        public ISecureCellData WrapDataStream(
+            Stream plainTextStream,
+            Stream contextStream = null)
+        {
+            if (plainTextStream == null) throw new ArgumentNullException(nameof(plainTextStream));
+
+            byte[] plainTextBytes = ConvertUtilsPortable.StreamToByteArray(plainTextStream);
+            byte[] contextBytes = ConvertUtilsPortable.StreamToByteArray(contextStream);
+
+            var result =
+                WrapData(
+                    plainTextData: plainTextBytes,
+                    context: contextBytes);
+
+            return result;
+        }
+
+        public Stream UnwrapDataAsStream(
+            ISecureCellData cypherTextData,
+            Stream contextStream = null)
+        {
+            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+
+            byte[] contextBytes = ConvertUtilsPortable.StreamToByteArray(contextStream);
+            byte[] resultBytes = UnwrapData(cypherTextData, context: contextBytes);
+
+            var result = ConvertUtilsPortable.ByteArrayToMemoryStream(resultBytes);
+
+            return result;
+        }
+
 
         private TSCellSeal _implCellSeal;
     }
