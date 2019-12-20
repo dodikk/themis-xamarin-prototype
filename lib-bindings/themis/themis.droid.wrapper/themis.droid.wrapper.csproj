@@ -50,6 +50,7 @@
     <Compile Include="CellSealDroid.cs" />
     <Compile Include="SecureCellDataDroid.cs" />
     <Compile Include="CellSealBuilderDroid.cs" />
+    <Compile Include="CellContextImprintDroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
