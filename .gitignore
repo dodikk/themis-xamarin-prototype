@@ -6,3 +6,8 @@ bin
 *.suo
 *.pdb
 .vs
+*.aar
+*.aar.asc
+*.pom
+*.pom.asc
+./lib-native/ios/Carthage
