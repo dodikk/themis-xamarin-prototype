@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Com.Cossacklabs.Themis;
 
 namespace Themis.Droid
@@ -9,6 +10,8 @@ namespace Themis.Droid
 
         public SecureCellDataDroid(SecureCellData cypherTextHandle)
         {
+            if (cypherTextHandle == null) throw new ArgumentNullException(nameof(cypherTextHandle));
+
             _cypherTextHandle = cypherTextHandle;
         }
 
@@ -16,7 +19,7 @@ namespace Themis.Droid
         {
             try
             {
-                if (null != _cypherTextHandle)
+                if (_cypherTextHandle != null)
                 {
                     _cypherTextHandle.Dispose();
                     _cypherTextHandle = null;
@@ -44,6 +47,14 @@ namespace Themis.Droid
                     message: "[FAIL] [droid] SecureCellData.GetProtectedData() java method failed",
                     inner: ex);
             }
+        }
+
+        public Stream GetEncryptedDataAsStream()
+        {
+            var resultBytes = GetEncryptedData();
+            var result = ConvertUtilsPortable.ByteArrayToMemoryStream(resultBytes);
+
+            return result;
         }
 
         private SecureCellData _cypherTextHandle;

@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Foundation;
+using Themis.iOS.Utils;
 
 
 namespace Themis.iOS
@@ -12,6 +14,8 @@ namespace Themis.iOS
             NSData cypherText,
             bool shouldConsumeCypherTextObject = true)
         {
+            if (cypherText == null) throw new ArgumentNullException(nameof(cypherText));
+
             _cypherText = cypherText;
             _shouldConsumeCypherTextObject = shouldConsumeCypherTextObject;
         }
@@ -20,7 +24,7 @@ namespace Themis.iOS
         {
             try
             {
-                if (null != _cypherText)
+                if (_cypherText != null)
                 {
                     if (_shouldConsumeCypherTextObject)
                     {
@@ -41,12 +45,13 @@ namespace Themis.iOS
 
         public byte[] GetEncryptedData()
         {
-            using (MemoryStream ms = new MemoryStream())
-            using (Stream nsDataStream = _cypherText.AsStream())
-            {
-                nsDataStream.CopyTo(ms);
-                return ms.ToArray();
-            }
+            byte[] result = ConvertUtilsIos.NSDataToByteArray(_cypherText);
+            return result;
+        }
+
+        public Stream GetEncryptedDataAsStream()
+        {
+            return _cypherText.AsStream();
         }
 
         private bool _shouldConsumeCypherTextObject;
