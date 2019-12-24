@@ -44,8 +44,10 @@
     <Compile Include="CellSealIos.cs" />
     <Compile Include="SecureCellDataIos.cs" />
     <Compile Include="CellSealBuilderIos.cs" />
-    <Compile Include="ConvertUtilsIos.cs" />
     <Compile Include="CellContextImprintIos.cs" />
+    <Compile Include="ConvertUtilsIos.cs" />
+    <Compile Include="Clock\MonotonicClockIos.cs" />
+    <Compile Include="Clock\BootTimeGetterFromSysctl.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\themis.pcl\themis.pcl.csproj">
