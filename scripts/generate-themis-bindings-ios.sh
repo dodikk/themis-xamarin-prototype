@@ -1,6 +1,6 @@
 sharpie bind                                                         \
     -framework ../lib-native/ios/Carthage/Build/iOS/themis.framework \
-    -sdk iphoneos13.2                                                \
+    -sdk iphoneos13.6                                                \
     -output ../lib-bindings/themis/themis.ios                        \
     -namespace "Themis.iOS"
 
