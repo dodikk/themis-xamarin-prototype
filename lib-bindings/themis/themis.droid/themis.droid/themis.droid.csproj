@@ -53,15 +53,13 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="..\..\..\..\lib-native\droid-aar\themis-0.12.0.aar">
-      <Link>Jars\themis-0.12.0.aar</Link>
-    </LibraryProjectZip>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\themis.pcl\themis.pcl.csproj">
       <Project>{043CE410-3CE8-4C55-9D2D-E7C883DC31BC}</Project>
       <Name>themis.pcl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryProjectZip Include="Jars\themis-0.13.1.aar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
