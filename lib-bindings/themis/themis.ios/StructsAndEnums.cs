@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+using Foundation;
 using ObjCRuntime;
 
 namespace Themis.iOS
@@ -7,6 +9,15 @@ namespace Themis.iOS
 	{
 		Rsa,
 		Ec
+	}
+
+	static class CFunctions
+	{
+		// extern NSData * _Nullable TSGenerateSymmetricKey ();
+		[DllImport ("__Internal")]
+		[Verify (PlatformInvoke)]
+		[return: NullAllowed]
+		static extern NSData TSGenerateSymmetricKey ();
 	}
 
 	[Native]
