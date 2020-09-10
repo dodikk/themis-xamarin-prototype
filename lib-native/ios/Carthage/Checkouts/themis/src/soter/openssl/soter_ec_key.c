@@ -18,6 +18,7 @@
 
 #include <string.h>
 
+#include <openssl/bn.h>
 #include <openssl/ec.h>
 #include <openssl/evp.h>
 
@@ -265,7 +266,7 @@ soter_status_t soter_ec_pub_key_to_engine_specific(const soter_container_hdr_t* 
     }
 
     /* Validate tag */
-    if (memcmp(key->tag, EC_PUB_KEY_PREF, strlen(EC_PUB_KEY_PREF))) {
+    if (memcmp(key->tag, EC_PUB_KEY_PREF, strlen(EC_PUB_KEY_PREF)) != 0) {
         return SOTER_INVALID_PARAMETER;
     }
 
@@ -362,7 +363,7 @@ soter_status_t soter_ec_priv_key_to_engine_specific(const soter_container_hdr_t*
     }
 
     /* Validate tag */
-    if (memcmp(key->tag, EC_PRIV_KEY_PREF, strlen(EC_PRIV_KEY_PREF))) {
+    if (memcmp(key->tag, EC_PRIV_KEY_PREF, strlen(EC_PRIV_KEY_PREF)) != 0) {
         return SOTER_INVALID_PARAMETER;
     }
 

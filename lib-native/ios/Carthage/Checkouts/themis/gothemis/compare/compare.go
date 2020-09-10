@@ -53,9 +53,10 @@ static int compare_result(void *ctx)
 */
 import "C"
 import (
-	"github.com/cossacklabs/themis/gothemis/errors"
 	"runtime"
 	"unsafe"
+
+	"github.com/cossacklabs/themis/gothemis/errors"
 )
 
 // Secure comparison result.
@@ -74,6 +75,13 @@ const (
 	COMPARE_NOT_READY = NotReady
 )
 
+// Errors returned by Secure Comparator.
+var (
+	ErrMissingSecret = errors.NewWithCode(errors.InvalidParameter, "empty secret for Secure Comparator")
+	ErrMissingData   = errors.NewWithCode(errors.InvalidParameter, "empty comparison message for Secure Comparator")
+	ErrOverflow      = errors.NewWithCode(errors.NoMemory, "Secure Comparator cannot allocate enough memory")
+)
+
 // SecureCompare is an interactive protocol for two parties that compares whether
 // they share the same secret or not.
 type SecureCompare struct {
@@ -82,6 +90,13 @@ type SecureCompare struct {
 
 func finalize(sc *SecureCompare) {
 	sc.Close()
+}
+
+// C returns sizes as size_t but Go expresses buffer lengths as int.
+// Make sure that all sizes are representable in Go and there is no overflows.
+func sizeOverflow(n C.size_t) bool {
+	const maxInt = int(^uint(0) >> 1)
+	return n > C.size_t(maxInt)
 }
 
 // New prepares a new secure comparison.
@@ -113,7 +128,7 @@ func (sc *SecureCompare) Close() error {
 // Append adds data to be compared.
 func (sc *SecureCompare) Append(secret []byte) error {
 	if nil == secret || 0 == len(secret) {
-		return errors.New("Secret was not provided")
+		return ErrMissingSecret
 	}
 	if !bool(C.compare_append(sc.ctx, unsafe.Pointer(&secret[0]), C.size_t(len(secret)))) {
 		return errors.New("Failed to append secret")
@@ -128,6 +143,9 @@ func (sc *SecureCompare) Begin() ([]byte, error) {
 
 	if !bool(C.compare_begin_size(sc.ctx, &outLen)) {
 		return nil, errors.New("Failed to get output size")
+	}
+	if sizeOverflow(outLen) {
+		return nil, ErrOverflow
 	}
 
 	out := make([]byte, outLen)
@@ -145,11 +163,14 @@ func (sc *SecureCompare) Proceed(data []byte) ([]byte, error) {
 	var outLen C.size_t
 
 	if nil == data || 0 == len(data) {
-		return nil, errors.New("Data was not provided")
+		return nil, ErrMissingData
 	}
 
 	if !bool(C.compare_proceed_size(sc.ctx, unsafe.Pointer(&data[0]), C.size_t(len(data)), &outLen)) {
 		return nil, errors.New("Failed to get output size")
+	}
+	if sizeOverflow(outLen) {
+		return nil, ErrOverflow
 	}
 
 	if 0 == outLen {

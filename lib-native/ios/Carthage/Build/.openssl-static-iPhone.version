@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "1.1.107",
+  "iOS" : [
+    {
+      "name" : "openssl",
+      "hash" : "96143570190c4fcfc108ba750091cb16cc796126df2a9a4f0b8195662d770026"
+    }
+  ]
+}
