@@ -1,26 +1,27 @@
 using System;
 using Foundation;
 using ObjCRuntime;
-using themis;
+
+// using themis;
 
 namespace Themis.iOS
 {
 	[Static]
-	[Verify (ConstantsInterfaceAssociation)]
+	//[Verify (ConstantsInterfaceAssociation)]
 	partial interface Constants
 	{
 		// extern double themisVersionNumber;
-		[Field ("themisVersionNumber", "__Internal")]
-		double themisVersionNumber { get; }
+		//[Field ("themisVersionNumber", "__Internal")]
+		//double ThemisVersionNumber { get; }
 
 		// extern const unsigned char [] themisVersionString;
-		[Field ("themisVersionString", "__Internal")]
-		byte[] themisVersionString { get; }
+		// [Field ("themisVersionString", "__Internal")]
+		// byte[] ThemisVersionString { get; }
 	}
 
 	// @interface TSCell : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSCell
+	interface TSCell : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// @property (readonly, nonatomic) NSData * _Nonnull key;
 		[Export ("key")]
@@ -33,7 +34,7 @@ namespace Themis.iOS
 
 	// @interface TSCellSeal : TSCell
 	[BaseType (typeof(TSCell))]
-	interface TSCellSeal
+	interface TSCellSeal : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(instancetype _Nullable)initWithKey:(NSData * _Nonnull)key __attribute__((objc_designated_initializer));
 		[Export ("initWithKey:")]
@@ -42,11 +43,11 @@ namespace Themis.iOS
 
 		// -(instancetype _Nullable)initWithPassphrase:(NSString * _Nonnull)passphrase;
 		[Export ("initWithPassphrase:")]
-		IntPtr Constructor (string passphrase);
+		IntPtr Constructor(string passphrase);
 
 		// -(instancetype _Nullable)initWithPassphraseData:(NSData * _Nonnull)passphrase;
 		[Export ("initWithPassphraseData:")]
-		IntPtr Constructor (NSData passphrase);
+		IntPtr ConstructorInitWithPassphraseData(NSData passphrase);
 
 		// -(NSData * _Nullable)encrypt:(NSData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error;
 		[Export ("encrypt:context:error:")]
@@ -59,13 +60,13 @@ namespace Themis.iOS
 		NSData Encrypt (NSData message, [NullAllowed] out NSError error);
 
 		// -(NSData * _Nullable)encrypt:(NSData * _Nonnull)message context:(NSData * _Nullable)context __attribute__((availability(swift, unavailable)));
-		[Unavailable (PlatformName.Swift)]
+		// [Unavailable (PlatformName.Swift)]
 		[Export ("encrypt:context:")]
 		[return: NullAllowed]
 		NSData Encrypt (NSData message, [NullAllowed] NSData context);
 
 		// -(NSData * _Nullable)encrypt:(NSData * _Nonnull)message __attribute__((availability(swift, unavailable)));
-		[Unavailable (PlatformName.Swift)]
+		// [Unavailable (PlatformName.Swift)]
 		[Export ("encrypt:")]
 		[return: NullAllowed]
 		NSData Encrypt (NSData message);
@@ -91,13 +92,13 @@ namespace Themis.iOS
 		NSData Decrypt (NSData message, [NullAllowed] out NSError error);
 
 		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message context:(NSData * _Nullable)context __attribute__((availability(swift, unavailable)));
-		[Unavailable (PlatformName.Swift)]
+		// [Unavailable (PlatformName.Swift)]
 		[Export ("decrypt:context:")]
 		[return: NullAllowed]
 		NSData Decrypt (NSData message, [NullAllowed] NSData context);
 
 		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message __attribute__((availability(swift, unavailable)));
-		[Unavailable (PlatformName.Swift)]
+		// [Unavailable (PlatformName.Swift)]
 		[Export ("decrypt:")]
 		[return: NullAllowed]
 		NSData Decrypt (NSData message);
@@ -115,7 +116,7 @@ namespace Themis.iOS
 
 	// @interface TSCellTokenEncryptedData : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSCellTokenEncryptedData
+	interface TSCellTokenEncryptedData : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// @property (nonatomic, strong) NSMutableData * _Nonnull cipherText;
 		[Export ("cipherText", ArgumentSemantic.Strong)]
@@ -128,7 +129,7 @@ namespace Themis.iOS
 
 	// @interface TSCellTokenEncryptedResult : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSCellTokenEncryptedResult
+	interface TSCellTokenEncryptedResult : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// @property (readonly, nonatomic) NSData * _Nonnull encrypted;
 		[Export ("encrypted")]
@@ -145,7 +146,7 @@ namespace Themis.iOS
 
 	// @interface TSCellToken : TSCell
 	[BaseType (typeof(TSCell))]
-	interface TSCellToken
+	interface TSCellToken : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(instancetype _Nullable)initWithKey:(NSData * _Nonnull)key;
 		[Export ("initWithKey:")]
@@ -162,13 +163,13 @@ namespace Themis.iOS
 		TSCellTokenEncryptedResult Encrypt (NSData message, [NullAllowed] out NSError error);
 
 		// -(TSCellTokenEncryptedResult * _Nullable)encrypt:(NSData * _Nonnull)message context:(NSData * _Nullable)context __attribute__((availability(swift, unavailable)));
-		[Unavailable (PlatformName.Swift)]
+		// [Unavailable (PlatformName.Swift)]
 		[Export ("encrypt:context:")]
 		[return: NullAllowed]
 		TSCellTokenEncryptedResult Encrypt (NSData message, [NullAllowed] NSData context);
 
 		// -(TSCellTokenEncryptedResult * _Nullable)encrypt:(NSData * _Nonnull)message __attribute__((availability(swift, unavailable)));
-		[Unavailable (PlatformName.Swift)]
+		// [Unavailable (PlatformName.Swift)]
 		[Export ("encrypt:")]
 		[return: NullAllowed]
 		TSCellTokenEncryptedResult Encrypt (NSData message);
@@ -194,13 +195,13 @@ namespace Themis.iOS
 		NSData Decrypt (NSData message, NSData token, [NullAllowed] out NSError error);
 
 		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message token:(NSData * _Nonnull)token context:(NSData * _Nullable)context __attribute__((availability(swift, unavailable)));
-		[Unavailable (PlatformName.Swift)]
+		// [Unavailable (PlatformName.Swift)]
 		[Export ("decrypt:token:context:")]
 		[return: NullAllowed]
 		NSData Decrypt (NSData message, NSData token, [NullAllowed] NSData context);
 
 		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message token:(NSData * _Nonnull)token __attribute__((availability(swift, unavailable)));
-		[Unavailable (PlatformName.Swift)]
+		// [Unavailable (PlatformName.Swift)]
 		[Export ("decrypt:token:")]
 		[return: NullAllowed]
 		NSData Decrypt (NSData message, NSData token);
@@ -218,7 +219,7 @@ namespace Themis.iOS
 
 	// @interface TSCellContextImprint : TSCell
 	[BaseType (typeof(TSCell))]
-	interface TSCellContextImprint
+	interface TSCellContextImprint : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(instancetype _Nullable)initWithKey:(NSData * _Nonnull)key;
 		[Export ("initWithKey:")]
@@ -230,7 +231,7 @@ namespace Themis.iOS
 		NSData Encrypt (NSData message, NSData context, [NullAllowed] out NSError error);
 
 		// -(NSData * _Nullable)encrypt:(NSData * _Nonnull)message context:(NSData * _Nonnull)context __attribute__((availability(swift, unavailable)));
-		[Unavailable (PlatformName.Swift)]
+		// [Unavailable (PlatformName.Swift)]
 		[Export ("encrypt:context:")]
 		[return: NullAllowed]
 		NSData Encrypt (NSData message, NSData context);
@@ -246,7 +247,7 @@ namespace Themis.iOS
 		NSData Decrypt (NSData message, NSData context, [NullAllowed] out NSError error);
 
 		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message context:(NSData * _Nonnull)context __attribute__((availability(swift, unavailable)));
-		[Unavailable (PlatformName.Swift)]
+		// [Unavailable (PlatformName.Swift)]
 		[Export ("decrypt:context:")]
 		[return: NullAllowed]
 		NSData Decrypt (NSData message, NSData context);
@@ -259,7 +260,7 @@ namespace Themis.iOS
 
 	// @interface TSKeyGen : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSKeyGen
+	interface TSKeyGen : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// @property (readonly, nonatomic) NSMutableData * _Nonnull privateKey;
 		[Export ("privateKey")]
@@ -271,12 +272,12 @@ namespace Themis.iOS
 
 		// -(instancetype _Nullable)initWithAlgorithm:(TSKeyGenAsymmetricAlgorithm)algorithm;
 		[Export ("initWithAlgorithm:")]
-		IntPtr Constructor (TSKeyGenAsymmetricAlgorithm algorithm);
+		IntPtr Constructor(/*TSKeyGenAsymmetricAlgorithm*/ long algorithm);
 	}
 
 	// @interface TSMessage : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSMessage
+	interface TSMessage : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// @property (readonly, nonatomic) NSData * _Nonnull privateKey;
 		[Export ("privateKey")]
@@ -288,15 +289,19 @@ namespace Themis.iOS
 
 		// @property (readonly, nonatomic) TSMessageMode mode;
 		[Export ("mode")]
-		TSMessageMode Mode { get; }
+		/*TSMessageMode*/ long Mode { get; }
 
 		// -(instancetype _Nullable)initInEncryptModeWithPrivateKey:(NSData * _Nonnull)privateKey peerPublicKey:(NSData * _Nonnull)peerPublicKey;
 		[Export ("initInEncryptModeWithPrivateKey:peerPublicKey:")]
-		IntPtr Constructor (NSData privateKey, NSData peerPublicKey);
+		IntPtr ConstructorInitInEncryptMode(
+			NSData privateKey,
+			NSData peerPublicKey);
 
 		// -(instancetype _Nullable)initInSignVerifyModeWithPrivateKey:(NSData * _Nullable)privateKey peerPublicKey:(NSData * _Nullable)peerPublicKey;
 		[Export ("initInSignVerifyModeWithPrivateKey:peerPublicKey:")]
-		IntPtr Constructor ([NullAllowed] NSData privateKey, [NullAllowed] NSData peerPublicKey);
+		IntPtr ConstructorInitInSignVerifyMode(
+			[NullAllowed] NSData privateKey,
+			[NullAllowed] NSData peerPublicKey);
 
 		// -(NSData * _Nullable)wrapData:(NSData * _Nullable)message error:(NSError * _Nullable * _Nullable)error;
 		[Export ("wrapData:error:")]
@@ -311,7 +316,7 @@ namespace Themis.iOS
 
 	// @interface TSComparator : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSComparator
+	interface TSComparator : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(instancetype _Nullable)initWithMessageToCompare:(NSData * _Nonnull)message;
 		[Export ("initWithMessageToCompare:")]
@@ -329,37 +334,41 @@ namespace Themis.iOS
 
 		// -(TSComparatorStateType)status;
 		[Export ("status")]
-		[Verify (MethodToProperty)]
-		TSComparatorStateType Status { get; }
+		// [Verify (MethodToProperty)]
+		/*TSComparatorStateType*/ long Status { get; }
 	}
 
 	// @interface TSSessionTransportInterface : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSSessionTransportInterface
+	interface TSSessionTransportInterface : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(void)sendData:(NSData * _Nullable)data error:(NSError * _Nullable * _Nullable)error;
 		[Export ("sendData:error:")]
-		void SendData ([NullAllowed] NSData data, [NullAllowed] out NSError error);
+		void SendData(
+			[NullAllowed] NSData data,
+			[NullAllowed] out NSError error);
 
 		// -(NSData * _Nullable)receiveDataWithError:(NSError * _Nullable * _Nullable)error;
 		[Export ("receiveDataWithError:")]
 		[return: NullAllowed]
-		NSData ReceiveDataWithError ([NullAllowed] out NSError error);
+		NSData ReceiveDataWithError([NullAllowed] out NSError error);
 
 		// -(NSData * _Nullable)publicKeyFor:(NSData * _Nullable)binaryId error:(NSError * _Nullable * _Nullable)error;
 		[Export ("publicKeyFor:error:")]
 		[return: NullAllowed]
-		NSData PublicKeyFor ([NullAllowed] NSData binaryId, [NullAllowed] out NSError error);
+		NSData PublicKeyFor(
+			[NullAllowed] NSData binaryId,
+			[NullAllowed] out NSError error);
 
 		// -(secure_session_user_callbacks_t * _Nonnull)callbacks;
-		[Export ("callbacks")]
-		[Verify (MethodToProperty)]
-		unsafe secure_session_user_callbacks_t* Callbacks { get; }
+		//[Export ("callbacks")]
+		//[Verify (MethodToProperty)]
+		//unsafe secure_session_user_callbacks_t* Callbacks { get; }
 	}
 
 	// @interface TSSession : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSSession
+	interface TSSession : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(instancetype _Nullable)initWithUserId:(NSData * _Nonnull)userId privateKey:(NSData * _Nonnull)privateKey callbacks:(TSSessionTransportInterface * _Nonnull)callbacks;
 		[Export ("initWithUserId:privateKey:callbacks:")]
@@ -391,11 +400,11 @@ namespace Themis.iOS
 		// -(NSData * _Nullable)unwrapAndReceive:(NSUInteger)length error:(NSError * _Nullable * _Nullable)error;
 		[Export ("unwrapAndReceive:error:")]
 		[return: NullAllowed]
-		NSData UnwrapAndReceive (nuint length, [NullAllowed] out NSError error);
+		NSData UnwrapAndReceive(nuint length, [NullAllowed] out NSError error);
 
 		// -(BOOL)isSessionEstablished;
 		[Export ("isSessionEstablished")]
-		[Verify (MethodToProperty)]
+		// [Verify (MethodToProperty)]
 		bool IsSessionEstablished { get; }
 	}
 }

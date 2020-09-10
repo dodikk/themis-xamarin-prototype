@@ -15,8 +15,8 @@ namespace Themis.iOS
 	{
 		// extern NSData * _Nullable TSGenerateSymmetricKey ();
 		[DllImport ("__Internal")]
-		[Verify (PlatformInvoke)]
-		[return: NullAllowed]
+		// [Verify (PlatformInvoke)]
+		// [return: NullAllowed]
 		static extern NSData TSGenerateSymmetricKey ();
 	}
 

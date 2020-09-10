@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CellSealDroid.cs" />
     <Compile Include="SecureCellDataDroid.cs" />
@@ -57,10 +56,8 @@
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\values\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\themis.pcl\themis.pcl.csproj">
