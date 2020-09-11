@@ -51,6 +51,7 @@
     <Compile Include="CellSealBuilderDroid.cs" />
     <Compile Include="CellContextImprintDroid.cs" />
     <Compile Include="Clock\MonotonicClockDroid.cs" />
+    <Compile Include="AesGcmDroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
