@@ -36,6 +36,20 @@ module.exports = class SecureCellTokenProtect {
         this.masterKey = masterKey
     }
 
+    /**
+     * Makes a new Secure Cell in Token Protect mode with given master key.
+     *
+     * @param masterKey     non-empty array of master key bytes (Buffer or Uint8Array)
+     *
+     * @returns a new instance of SecureCellTokenProtect.
+     *
+     * @throws TypeError if the master key is not a byte buffer.
+     * @throws ThemisError if the master key is empty.
+     */
+    static withKey(masterKey) {
+        return new SecureCellTokenProtect(masterKey)
+    }
+
     encrypt(message) {
         message = utils.coerceToBytes(message)
         if (message.length == 0) {
@@ -72,7 +86,7 @@ module.exports = class SecureCellTokenProtect {
                 context_ptr, context.length,
                 message_ptr, message.length,
                 null, token_length_ptr,
-                null, result_length_ptr,
+                null, result_length_ptr
             )
             if (status != ThemisErrorCode.BUFFER_TOO_SMALL) {
                 throw new ThemisError(cryptosystem_name, status)
@@ -91,7 +105,7 @@ module.exports = class SecureCellTokenProtect {
                 context_ptr, context.length,
                 message_ptr, message.length,
                 token_ptr, token_length_ptr,
-                result_ptr, result_length_ptr,
+                result_ptr, result_length_ptr
             )
             if (status != ThemisErrorCode.SUCCESS) {
                 throw new ThemisError(cryptosystem_name, status)

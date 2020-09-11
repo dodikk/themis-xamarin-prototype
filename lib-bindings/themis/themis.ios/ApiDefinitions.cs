@@ -2,26 +2,27 @@ using System;
 using Foundation;
 using ObjCRuntime;
 
+// using themis;
 
 namespace Themis.iOS
 {
-	//[Static]
+	[Static]
 	//[Verify (ConstantsInterfaceAssociation)]
-	//partial interface Constants
-	//{
-	//	// extern double themisVersionNumber;
-	//	[Field ("themisVersionNumber", "__Internal")]
-	//	double themisVersionNumber { get; }
+	partial interface Constants
+	{
+		// extern double themisVersionNumber;
+		//[Field ("themisVersionNumber", "__Internal")]
+		//double ThemisVersionNumber { get; }
 
-	//	// extern const unsigned char [] themisVersionString;
-	//	[Field ("themisVersionString", "__Internal")]
-	//	byte[] themisVersionString { get; }
-	//}
+		// extern const unsigned char [] themisVersionString;
+		// [Field ("themisVersionString", "__Internal")]
+		// byte[] ThemisVersionString { get; }
+	}
 
 	// @interface TSCell : NSObject
 	[BaseType (typeof(NSObject))]
 	interface TSCell : IDisposable, INativeObject, INSObjectProtocol
-    {
+	{
 		// @property (readonly, nonatomic) NSData * _Nonnull key;
 		[Export ("key")]
 		NSData Key { get; }
@@ -33,36 +34,89 @@ namespace Themis.iOS
 
 	// @interface TSCellSeal : TSCell
 	[BaseType (typeof(TSCell))]
-	interface TSCellSeal: IDisposable, INativeObject, INSObjectProtocol
+	interface TSCellSeal : IDisposable, INativeObject, INSObjectProtocol
 	{
-		// -(instancetype _Nullable)initWithKey:(NSData * _Nonnull)key;
+		// -(instancetype _Nullable)initWithKey:(NSData * _Nonnull)key __attribute__((objc_designated_initializer));
 		[Export ("initWithKey:")]
+		[DesignatedInitializer]
 		IntPtr Constructor (NSData key);
 
-		// -(NSData * _Nullable)wrapData:(NSData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error;
-		[Export ("wrapData:error:")]
-		[return: NullAllowed]
-		NSData WrapData (NSData message, [NullAllowed] out NSError error);
+		// -(instancetype _Nullable)initWithPassphrase:(NSString * _Nonnull)passphrase;
+		[Export ("initWithPassphrase:")]
+		IntPtr Constructor(string passphrase);
 
-		// -(NSData * _Nullable)unwrapData:(NSData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error;
-		[Export ("unwrapData:error:")]
-		[return: NullAllowed]
-		NSData UnwrapData (NSData message, [NullAllowed] out NSError error);
+		// -(instancetype _Nullable)initWithPassphraseData:(NSData * _Nonnull)passphrase;
+		[Export ("initWithPassphraseData:")]
+		IntPtr ConstructorInitWithPassphraseData(NSData passphrase);
 
-		// -(NSData * _Nullable)wrapData:(NSData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error;
+		// -(NSData * _Nullable)encrypt:(NSData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error;
+		[Export ("encrypt:context:error:")]
+		[return: NullAllowed]
+		NSData Encrypt (NSData message, [NullAllowed] NSData context, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)encrypt:(NSData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error;
+		[Export ("encrypt:error:")]
+		[return: NullAllowed]
+		NSData Encrypt (NSData message, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)encrypt:(NSData * _Nonnull)message context:(NSData * _Nullable)context __attribute__((availability(swift, unavailable)));
+		// [Unavailable (PlatformName.Swift)]
+		[Export ("encrypt:context:")]
+		[return: NullAllowed]
+		NSData Encrypt (NSData message, [NullAllowed] NSData context);
+
+		// -(NSData * _Nullable)encrypt:(NSData * _Nonnull)message __attribute__((availability(swift, unavailable)));
+		// [Unavailable (PlatformName.Swift)]
+		[Export ("encrypt:")]
+		[return: NullAllowed]
+		NSData Encrypt (NSData message);
+
+		// -(NSData * _Nullable)wrapData:(NSData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error __attribute__((deprecated("use 'encrypt:context:error:' instead")));
 		[Export ("wrapData:context:error:")]
 		[return: NullAllowed]
 		NSData WrapData (NSData message, [NullAllowed] NSData context, [NullAllowed] out NSError error);
 
-		// -(NSData * _Nullable)unwrapData:(NSData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error;
+		// -(NSData * _Nullable)wrapData:(NSData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error __attribute__((deprecated("use 'encrypt:error:' instead")));
+		[Export ("wrapData:error:")]
+		[return: NullAllowed]
+		NSData WrapData (NSData message, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error;
+		[Export ("decrypt:context:error:")]
+		[return: NullAllowed]
+		NSData Decrypt (NSData message, [NullAllowed] NSData context, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error;
+		[Export ("decrypt:error:")]
+		[return: NullAllowed]
+		NSData Decrypt (NSData message, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message context:(NSData * _Nullable)context __attribute__((availability(swift, unavailable)));
+		// [Unavailable (PlatformName.Swift)]
+		[Export ("decrypt:context:")]
+		[return: NullAllowed]
+		NSData Decrypt (NSData message, [NullAllowed] NSData context);
+
+		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message __attribute__((availability(swift, unavailable)));
+		// [Unavailable (PlatformName.Swift)]
+		[Export ("decrypt:")]
+		[return: NullAllowed]
+		NSData Decrypt (NSData message);
+
+		// -(NSData * _Nullable)unwrapData:(NSData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error __attribute__((deprecated("use 'decrypt:context:error:' instead")));
 		[Export ("unwrapData:context:error:")]
 		[return: NullAllowed]
 		NSData UnwrapData (NSData message, [NullAllowed] NSData context, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)unwrapData:(NSData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error __attribute__((deprecated("use 'decrypt:error:' instead")));
+		[Export ("unwrapData:error:")]
+		[return: NullAllowed]
+		NSData UnwrapData (NSData message, [NullAllowed] out NSError error);
 	}
 
 	// @interface TSCellTokenEncryptedData : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSCellTokenEncryptedData
+	interface TSCellTokenEncryptedData : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// @property (nonatomic, strong) NSMutableData * _Nonnull cipherText;
 		[Export ("cipherText", ArgumentSemantic.Strong)]
@@ -73,49 +127,132 @@ namespace Themis.iOS
 		NSMutableData Token { get; set; }
 	}
 
+	// @interface TSCellTokenEncryptedResult : NSObject
+	[BaseType (typeof(NSObject))]
+	interface TSCellTokenEncryptedResult : IDisposable, INativeObject, INSObjectProtocol
+	{
+		// @property (readonly, nonatomic) NSData * _Nonnull encrypted;
+		[Export ("encrypted")]
+		NSData Encrypted { get; }
+
+		// @property (readonly, nonatomic) NSData * _Nonnull token;
+		[Export ("token")]
+		NSData Token { get; }
+
+		// @property (readonly, nonatomic) NSData * _Nonnull cipherText __attribute__((deprecated("use 'encrypted' instead")));
+		[Export ("cipherText")]
+		NSData CipherText { get; }
+	}
+
 	// @interface TSCellToken : TSCell
 	[BaseType (typeof(TSCell))]
-	interface TSCellToken
+	interface TSCellToken : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(instancetype _Nullable)initWithKey:(NSData * _Nonnull)key;
 		[Export ("initWithKey:")]
 		IntPtr Constructor (NSData key);
 
-		// -(TSCellTokenEncryptedData * _Nullable)wrapData:(NSData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error;
-		[Export ("wrapData:error:")]
+		// -(TSCellTokenEncryptedResult * _Nullable)encrypt:(NSData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error;
+		[Export ("encrypt:context:error:")]
 		[return: NullAllowed]
-		TSCellTokenEncryptedData WrapData (NSData message, [NullAllowed] out NSError error);
+		TSCellTokenEncryptedResult Encrypt (NSData message, [NullAllowed] NSData context, [NullAllowed] out NSError error);
 
-		// -(NSData * _Nullable)unwrapData:(TSCellTokenEncryptedData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error;
-		[Export ("unwrapData:error:")]
+		// -(TSCellTokenEncryptedResult * _Nullable)encrypt:(NSData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error;
+		[Export ("encrypt:error:")]
 		[return: NullAllowed]
-		NSData UnwrapData (TSCellTokenEncryptedData message, [NullAllowed] out NSError error);
+		TSCellTokenEncryptedResult Encrypt (NSData message, [NullAllowed] out NSError error);
 
-		// -(TSCellTokenEncryptedData * _Nullable)wrapData:(NSData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error;
+		// -(TSCellTokenEncryptedResult * _Nullable)encrypt:(NSData * _Nonnull)message context:(NSData * _Nullable)context __attribute__((availability(swift, unavailable)));
+		// [Unavailable (PlatformName.Swift)]
+		[Export ("encrypt:context:")]
+		[return: NullAllowed]
+		TSCellTokenEncryptedResult Encrypt (NSData message, [NullAllowed] NSData context);
+
+		// -(TSCellTokenEncryptedResult * _Nullable)encrypt:(NSData * _Nonnull)message __attribute__((availability(swift, unavailable)));
+		// [Unavailable (PlatformName.Swift)]
+		[Export ("encrypt:")]
+		[return: NullAllowed]
+		TSCellTokenEncryptedResult Encrypt (NSData message);
+
+		// -(TSCellTokenEncryptedData * _Nullable)wrapData:(NSData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error __attribute__((deprecated("use 'encrypt:context:error:' instead")));
 		[Export ("wrapData:context:error:")]
 		[return: NullAllowed]
 		TSCellTokenEncryptedData WrapData (NSData message, [NullAllowed] NSData context, [NullAllowed] out NSError error);
 
-		// -(NSData * _Nullable)unwrapData:(TSCellTokenEncryptedData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error;
+		// -(TSCellTokenEncryptedData * _Nullable)wrapData:(NSData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error __attribute__((deprecated("use 'encrypt:error:' instead")));
+		[Export ("wrapData:error:")]
+		[return: NullAllowed]
+		TSCellTokenEncryptedData WrapData (NSData message, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message token:(NSData * _Nonnull)token context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error;
+		[Export ("decrypt:token:context:error:")]
+		[return: NullAllowed]
+		NSData Decrypt (NSData message, NSData token, [NullAllowed] NSData context, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message token:(NSData * _Nonnull)token error:(NSError * _Nullable * _Nullable)error;
+		[Export ("decrypt:token:error:")]
+		[return: NullAllowed]
+		NSData Decrypt (NSData message, NSData token, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message token:(NSData * _Nonnull)token context:(NSData * _Nullable)context __attribute__((availability(swift, unavailable)));
+		// [Unavailable (PlatformName.Swift)]
+		[Export ("decrypt:token:context:")]
+		[return: NullAllowed]
+		NSData Decrypt (NSData message, NSData token, [NullAllowed] NSData context);
+
+		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message token:(NSData * _Nonnull)token __attribute__((availability(swift, unavailable)));
+		// [Unavailable (PlatformName.Swift)]
+		[Export ("decrypt:token:")]
+		[return: NullAllowed]
+		NSData Decrypt (NSData message, NSData token);
+
+		// -(NSData * _Nullable)unwrapData:(TSCellTokenEncryptedData * _Nonnull)message context:(NSData * _Nullable)context error:(NSError * _Nullable * _Nullable)error __attribute__((deprecated("use 'decrypt:token:context:error:' instead")));
 		[Export ("unwrapData:context:error:")]
 		[return: NullAllowed]
 		NSData UnwrapData (TSCellTokenEncryptedData message, [NullAllowed] NSData context, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)unwrapData:(TSCellTokenEncryptedData * _Nonnull)message error:(NSError * _Nullable * _Nullable)error __attribute__((deprecated("use 'decrypt:token:error:' instead")));
+		[Export ("unwrapData:error:")]
+		[return: NullAllowed]
+		NSData UnwrapData (TSCellTokenEncryptedData message, [NullAllowed] out NSError error);
 	}
 
 	// @interface TSCellContextImprint : TSCell
 	[BaseType (typeof(TSCell))]
-	interface TSCellContextImprint
+	interface TSCellContextImprint : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(instancetype _Nullable)initWithKey:(NSData * _Nonnull)key;
 		[Export ("initWithKey:")]
 		IntPtr Constructor (NSData key);
 
-		// -(NSData * _Nullable)wrapData:(NSData * _Nonnull)message context:(NSData * _Nonnull)context error:(NSError * _Nullable * _Nullable)error;
+		// -(NSData * _Nullable)encrypt:(NSData * _Nonnull)message context:(NSData * _Nonnull)context error:(NSError * _Nullable * _Nullable)error;
+		[Export ("encrypt:context:error:")]
+		[return: NullAllowed]
+		NSData Encrypt (NSData message, NSData context, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)encrypt:(NSData * _Nonnull)message context:(NSData * _Nonnull)context __attribute__((availability(swift, unavailable)));
+		// [Unavailable (PlatformName.Swift)]
+		[Export ("encrypt:context:")]
+		[return: NullAllowed]
+		NSData Encrypt (NSData message, NSData context);
+
+		// -(NSData * _Nullable)wrapData:(NSData * _Nonnull)message context:(NSData * _Nonnull)context error:(NSError * _Nullable * _Nullable)error __attribute__((deprecated("use 'encrypt:context:error:' instead")));
 		[Export ("wrapData:context:error:")]
 		[return: NullAllowed]
 		NSData WrapData (NSData message, NSData context, [NullAllowed] out NSError error);
 
-		// -(NSData * _Nullable)unwrapData:(NSData * _Nonnull)message context:(NSData * _Nonnull)context error:(NSError * _Nullable * _Nullable)error;
+		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message context:(NSData * _Nonnull)context error:(NSError * _Nullable * _Nullable)error;
+		[Export ("decrypt:context:error:")]
+		[return: NullAllowed]
+		NSData Decrypt (NSData message, NSData context, [NullAllowed] out NSError error);
+
+		// -(NSData * _Nullable)decrypt:(NSData * _Nonnull)message context:(NSData * _Nonnull)context __attribute__((availability(swift, unavailable)));
+		// [Unavailable (PlatformName.Swift)]
+		[Export ("decrypt:context:")]
+		[return: NullAllowed]
+		NSData Decrypt (NSData message, NSData context);
+
+		// -(NSData * _Nullable)unwrapData:(NSData * _Nonnull)message context:(NSData * _Nonnull)context error:(NSError * _Nullable * _Nullable)error __attribute__((deprecated("use 'decrypt:context:error:' instead")));
 		[Export ("unwrapData:context:error:")]
 		[return: NullAllowed]
 		NSData UnwrapData (NSData message, NSData context, [NullAllowed] out NSError error);
@@ -123,7 +260,7 @@ namespace Themis.iOS
 
 	// @interface TSKeyGen : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSKeyGen
+	interface TSKeyGen : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// @property (readonly, nonatomic) NSMutableData * _Nonnull privateKey;
 		[Export ("privateKey")]
@@ -135,12 +272,12 @@ namespace Themis.iOS
 
 		// -(instancetype _Nullable)initWithAlgorithm:(TSKeyGenAsymmetricAlgorithm)algorithm;
 		[Export ("initWithAlgorithm:")]
-		IntPtr Constructor (Themis.iOS.TSKeyGenAsymmetricAlgorithm algorithm);
+		IntPtr Constructor(/*TSKeyGenAsymmetricAlgorithm*/ long algorithm);
 	}
 
 	// @interface TSMessage : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSMessage
+	interface TSMessage : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// @property (readonly, nonatomic) NSData * _Nonnull privateKey;
 		[Export ("privateKey")]
@@ -152,19 +289,19 @@ namespace Themis.iOS
 
 		// @property (readonly, nonatomic) TSMessageMode mode;
 		[Export ("mode")]
-        Themis.iOS.TSMessageMode Mode { get; }
+		/*TSMessageMode*/ long Mode { get; }
 
 		// -(instancetype _Nullable)initInEncryptModeWithPrivateKey:(NSData * _Nonnull)privateKey peerPublicKey:(NSData * _Nonnull)peerPublicKey;
 		[Export ("initInEncryptModeWithPrivateKey:peerPublicKey:")]
-		IntPtr InitInEncryptMode(// Constructor
-            NSData privateKey,
-            NSData peerPublicKey);
+		IntPtr ConstructorInitInEncryptMode(
+			NSData privateKey,
+			NSData peerPublicKey);
 
 		// -(instancetype _Nullable)initInSignVerifyModeWithPrivateKey:(NSData * _Nullable)privateKey peerPublicKey:(NSData * _Nullable)peerPublicKey;
 		[Export ("initInSignVerifyModeWithPrivateKey:peerPublicKey:")]
-		IntPtr InitInSignVerifyMode( // Constructor (
-            [NullAllowed] NSData privateKey,
-            [NullAllowed] NSData peerPublicKey);
+		IntPtr ConstructorInitInSignVerifyMode(
+			[NullAllowed] NSData privateKey,
+			[NullAllowed] NSData peerPublicKey);
 
 		// -(NSData * _Nullable)wrapData:(NSData * _Nullable)message error:(NSError * _Nullable * _Nullable)error;
 		[Export ("wrapData:error:")]
@@ -179,7 +316,7 @@ namespace Themis.iOS
 
 	// @interface TSComparator : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSComparator
+	interface TSComparator : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(instancetype _Nullable)initWithMessageToCompare:(NSData * _Nonnull)message;
 		[Export ("initWithMessageToCompare:")]
@@ -197,26 +334,31 @@ namespace Themis.iOS
 
 		// -(TSComparatorStateType)status;
 		[Export ("status")]
-        Themis.iOS.TSComparatorStateType Status { get; }
+		// [Verify (MethodToProperty)]
+		/*TSComparatorStateType*/ long Status { get; }
 	}
 
 	// @interface TSSessionTransportInterface : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSSessionTransportInterface
+	interface TSSessionTransportInterface : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(void)sendData:(NSData * _Nullable)data error:(NSError * _Nullable * _Nullable)error;
 		[Export ("sendData:error:")]
-		void SendData ([NullAllowed] NSData data, [NullAllowed] out NSError error);
+		void SendData(
+			[NullAllowed] NSData data,
+			[NullAllowed] out NSError error);
 
 		// -(NSData * _Nullable)receiveDataWithError:(NSError * _Nullable * _Nullable)error;
 		[Export ("receiveDataWithError:")]
 		[return: NullAllowed]
-		NSData ReceiveDataWithError ([NullAllowed] out NSError error);
+		NSData ReceiveDataWithError([NullAllowed] out NSError error);
 
 		// -(NSData * _Nullable)publicKeyFor:(NSData * _Nullable)binaryId error:(NSError * _Nullable * _Nullable)error;
 		[Export ("publicKeyFor:error:")]
 		[return: NullAllowed]
-		NSData PublicKeyFor ([NullAllowed] NSData binaryId, [NullAllowed] out NSError error);
+		NSData PublicKeyFor(
+			[NullAllowed] NSData binaryId,
+			[NullAllowed] out NSError error);
 
 		// -(secure_session_user_callbacks_t * _Nonnull)callbacks;
 		//[Export ("callbacks")]
@@ -226,7 +368,7 @@ namespace Themis.iOS
 
 	// @interface TSSession : NSObject
 	[BaseType (typeof(NSObject))]
-	interface TSSession
+	interface TSSession : IDisposable, INativeObject, INSObjectProtocol
 	{
 		// -(instancetype _Nullable)initWithUserId:(NSData * _Nonnull)userId privateKey:(NSData * _Nonnull)privateKey callbacks:(TSSessionTransportInterface * _Nonnull)callbacks;
 		[Export ("initWithUserId:privateKey:callbacks:")]
@@ -258,10 +400,11 @@ namespace Themis.iOS
 		// -(NSData * _Nullable)unwrapAndReceive:(NSUInteger)length error:(NSError * _Nullable * _Nullable)error;
 		[Export ("unwrapAndReceive:error:")]
 		[return: NullAllowed]
-		NSData UnwrapAndReceive (nuint length, [NullAllowed] out NSError error);
+		NSData UnwrapAndReceive(nuint length, [NullAllowed] out NSError error);
 
 		// -(BOOL)isSessionEstablished;
 		[Export ("isSessionEstablished")]
+		// [Verify (MethodToProperty)]
 		bool IsSessionEstablished { get; }
 	}
 }

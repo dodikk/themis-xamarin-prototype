@@ -48,6 +48,7 @@
     <Compile Include="ConvertUtilsIos.cs" />
     <Compile Include="Clock\MonotonicClockIos.cs" />
     <Compile Include="Clock\BootTimeGetterFromSysctl.cs" />
+    <Compile Include="AesGcmIos.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\themis.pcl\themis.pcl.csproj">
