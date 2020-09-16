@@ -10,18 +10,18 @@ namespace Themis
             // IDLE
         }
 
-        public byte[] UnwrapData(ISecureCellData cypherTextData, byte[] context = null)
+        public byte[] UnwrapData(ISecureCellData cipherTextData, byte[] context = null)
         {
             // no decryption since it's a mock
             // -
-            return cypherTextData.GetEncryptedData();
+            return cipherTextData.GetEncryptedData();
         }
 
-        public Stream UnwrapDataAsStream(ISecureCellData cypherTextData, Stream contextStream = null)
+        public Stream UnwrapDataAsStream(ISecureCellData cipherTextData, Stream contextStream = null)
         {
             // no decryption since it's a mock
             // -
-            return cypherTextData.GetEncryptedDataAsStream();
+            return cipherTextData.GetEncryptedDataAsStream();
         }
 
         public ISecureCellData WrapData(byte[] plainTextData, byte[] context = null)

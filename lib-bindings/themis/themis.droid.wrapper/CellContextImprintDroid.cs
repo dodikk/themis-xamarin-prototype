@@ -11,9 +11,7 @@ namespace Themis.Droid
         {
             if (masterKeyData == null) throw new ArgumentNullException(nameof(masterKeyData));
 
-            _themisImprint = new SecureCell(
-                key: masterKeyData,
-                mode: SecureCell.ModeContextImprint);
+            _themisImprint = SecureCell.ContextImprintWithKey(masterKeyData);
         }
 
         public void Dispose()
@@ -39,11 +37,9 @@ namespace Themis.Droid
         {
             if (fromData == null) throw new ArgumentNullException(nameof(fromData));
 
-            SecureCellData result = _themisImprint.Protect(
-                context: context,
-                data: fromData);
+            byte[] result = _themisImprint.Encrypt(fromData, context);
 
-            return result.GetProtectedData();
+            return result;
         }
 
         public Stream DeriveKeyAsStream(Stream fromStream, Stream contextStream = null)
@@ -61,6 +57,6 @@ namespace Themis.Droid
             return result;
         }
 
-        private SecureCell _themisImprint;
+        private SecureCell.IContextImprint _themisImprint;
     }
 }

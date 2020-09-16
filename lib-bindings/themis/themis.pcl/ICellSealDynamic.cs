@@ -19,7 +19,7 @@ namespace Themis
             byte[] key);
 
         byte[] UnwrapData(
-            ISecureCellData cypherTextData,
+            ISecureCellData cipherTextData,
             byte[] context,
             byte[] key);
 
@@ -29,7 +29,7 @@ namespace Themis
             Stream keyStream);
 
         Stream UnwrapDataAsStream(
-            ISecureCellData cypherTextData,
+            ISecureCellData cipherTextData,
             Stream contextStream,
             Stream keyStream);
     }

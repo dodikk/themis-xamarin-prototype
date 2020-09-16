@@ -1,6 +1,6 @@
 sharpie bind                                                         \
     -framework ../lib-native/ios/Carthage/Build/iOS/themis.framework \
-    -sdk iphoneos13.2                                                \
+    -sdk iphoneos13.6                                                \
     -output ../lib-bindings/themis/themis.ios                        \
     -namespace "Themis.iOS"
 
@@ -12,7 +12,7 @@ sharpie bind                                                         \
 
 # ===
 # [Verify] attributes intentionally cause C# compilation errors 
-so that you are forced to verify the binding. 
-You should remove the [Verify] attribute 
-when you have reviewed (and possibly corrected) the code.
+# so that you are forced to verify the binding. 
+# You should remove the [Verify] attribute 
+# when you have reviewed (and possibly corrected) the code.
 # ===

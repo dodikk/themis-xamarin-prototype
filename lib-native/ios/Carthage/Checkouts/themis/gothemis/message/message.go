@@ -63,9 +63,10 @@ static bool process(const void *priv, size_t priv_len, const void *public, size_
 */
 import "C"
 import (
+	"unsafe"
+
 	"github.com/cossacklabs/themis/gothemis/errors"
 	"github.com/cossacklabs/themis/gothemis/keys"
-	"unsafe"
 )
 
 const (
@@ -73,6 +74,14 @@ const (
 	secureMessageDecrypt
 	secureMessageSign
 	secureMessageVerify
+)
+
+// Errors returned by Secure Message.
+var (
+	ErrMissingMessage    = errors.NewWithCode(errors.InvalidParameter, "empty message for Secure Cell")
+	ErrMissingPublicKey  = errors.NewWithCode(errors.InvalidParameter, "empty peer public key for Secure Message")
+	ErrMissingPrivateKey = errors.NewWithCode(errors.InvalidParameter, "empty private key for Secure Message")
+	ErrOverflow          = errors.NewWithCode(errors.NoMemory, "Secure Message cannot allocate enough memory")
 )
 
 // SecureMessage provides a sequence-independent, stateless, contextless messaging system.
@@ -88,9 +97,16 @@ func New(private *keys.PrivateKey, peerPublic *keys.PublicKey) *SecureMessage {
 	return &SecureMessage{private, peerPublic}
 }
 
+// C returns sizes as size_t but Go expresses buffer lengths as int.
+// Make sure that all sizes are representable in Go and there is no overflows.
+func sizeOverflow(n C.size_t) bool {
+	const maxInt = int(^uint(0) >> 1)
+	return n > C.size_t(maxInt)
+}
+
 func messageProcess(private *keys.PrivateKey, peerPublic *keys.PublicKey, message []byte, mode int) ([]byte, error) {
 	if nil == message || 0 == len(message) {
-		return nil, errors.New("No message was provided")
+		return nil, ErrMissingMessage
 	}
 
 	var priv, pub unsafe.Pointer
@@ -120,6 +136,9 @@ func messageProcess(private *keys.PrivateKey, peerPublic *keys.PublicKey, messag
 		C.int(mode),
 		&outputLength)) {
 		return nil, errors.New("Failed to get output size")
+	}
+	if sizeOverflow(outputLength) {
+		return nil, ErrOverflow
 	}
 
 	output := make([]byte, int(outputLength), int(outputLength))
@@ -152,11 +171,11 @@ func messageProcess(private *keys.PrivateKey, peerPublic *keys.PublicKey, messag
 // Wrap encrypts the provided message.
 func (sm *SecureMessage) Wrap(message []byte) ([]byte, error) {
 	if nil == sm.private || 0 == len(sm.private.Value) {
-		return nil, errors.New("Private key was not provided")
+		return nil, ErrMissingPrivateKey
 	}
 
 	if nil == sm.peerPublic || 0 == len(sm.peerPublic.Value) {
-		return nil, errors.New("Peer public key was not provided")
+		return nil, ErrMissingPublicKey
 	}
 	return messageProcess(sm.private, sm.peerPublic, message, secureMessageEncrypt)
 }
@@ -164,11 +183,11 @@ func (sm *SecureMessage) Wrap(message []byte) ([]byte, error) {
 // Unwrap decrypts the encrypted message.
 func (sm *SecureMessage) Unwrap(message []byte) ([]byte, error) {
 	if nil == sm.private || 0 == len(sm.private.Value) {
-		return nil, errors.New("Private key was not provided")
+		return nil, ErrMissingPrivateKey
 	}
 
 	if nil == sm.peerPublic || 0 == len(sm.peerPublic.Value) {
-		return nil, errors.New("Peer public key was not provided")
+		return nil, ErrMissingPublicKey
 	}
 	return messageProcess(sm.private, sm.peerPublic, message, secureMessageDecrypt)
 }
@@ -176,7 +195,7 @@ func (sm *SecureMessage) Unwrap(message []byte) ([]byte, error) {
 // Sign signs the provided message and returns it signed.
 func (sm *SecureMessage) Sign(message []byte) ([]byte, error) {
 	if nil == sm.private || 0 == len(sm.private.Value) {
-		return nil, errors.New("Private key was not provided")
+		return nil, ErrMissingPrivateKey
 	}
 
 	return messageProcess(sm.private, nil, message, secureMessageSign)
@@ -185,7 +204,7 @@ func (sm *SecureMessage) Sign(message []byte) ([]byte, error) {
 // Verify checks the signature on the message and returns the original message.
 func (sm *SecureMessage) Verify(message []byte) ([]byte, error) {
 	if nil == sm.peerPublic || 0 == len(sm.peerPublic.Value) {
-		return nil, errors.New("Peer public key was not provided")
+		return nil, ErrMissingPublicKey
 	}
 
 	return messageProcess(nil, sm.peerPublic, message, secureMessageVerify)

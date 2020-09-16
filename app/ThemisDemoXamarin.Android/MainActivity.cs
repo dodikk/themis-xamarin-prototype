@@ -49,7 +49,9 @@ namespace ThemisDemoXamarin.Droid
         private void ExecuteThemisNativeSample()
         {
             string masterKeyString = "UkVDMgAAAC13PCVZAKOczZXUpvkhsC+xvwWnv3CLmlG0Wzy8ZBMnT+2yx/dg";
-            var secureCell = new SecureCell(masterKeyString);
+            byte[] masterKeyBytes = Convert.FromBase64String(masterKeyString);
+            var secureCell = SecureCell.SealWithKey(masterKeyBytes);
+                // new SecureCell(masterKeyString);
 
             string plainTextMessage = "Droid binding plain text message";
             Console.WriteLine($"[themis demo] Initial Text: {plainTextMessage}");
@@ -67,31 +69,35 @@ namespace ThemisDemoXamarin.Droid
             Console.WriteLine($"[themis demo] Initial Text base64: {plainTextBase64}");
 
 
-            SecureCellData cypherTextHolder =
-                secureCell.Protect(
-                    context: "no context",
-                    data: plainTextMessageData);
+            byte[] mockContextBytes =
+                "no context".ToCharArray()
+                            .Select(ch => (byte)ch)
+                            .ToArray();
+
+            byte[] cipherText = secureCell.Encrypt(
+                plainTextMessageData,
+                mockContextBytes);
 
             Console.WriteLine("[themis demo] Done.");
 
-            // convert cyphertext for printing
+            // convert ciphertext for printing
             // -
-            byte[] cypherText = cypherTextHolder.GetProtectedData();
-            char[] cypherTextChars = cypherText.Select(b => (char)b).ToArray();
-            string cypherTextBase64 = Convert.ToBase64String(cypherText);
+            char[] cipherTextChars = cipherText.Select(b => (char)b).ToArray();
+            string cipherTextBase64 = Convert.ToBase64String(cipherText);
 
-            string txtCypherText =
+            string txtCipherText =
                 new string(
-                    value: cypherTextChars,
+                    value: cipherTextChars,
                     startIndex: 0,
-                    length: cypherTextChars.Length);
-            Console.WriteLine($"[themis demo] Cypher Text: {txtCypherText}");
-            Console.WriteLine($"[themis demo] Cypher Text base64: {cypherTextBase64}");
+                    length: cipherTextChars.Length);
+            Console.WriteLine($"[themis demo] cipher Text: {txtCipherText}");
+            Console.WriteLine($"[themis demo] cipher Text base64: {cipherTextBase64}");
 
 
-            byte[] decryptedData = secureCell.Unprotect(
-                context: "no context",
-                protectedData: cypherTextHolder);
+            byte[] decryptedData = secureCell.Decrypt(
+                cipherText,
+                mockContextBytes);
+
             char[] decryptedDataChars = decryptedData.Select(b => (char)b).ToArray();
             string decryptedDataBase64 = Convert.ToBase64String(decryptedData);
 

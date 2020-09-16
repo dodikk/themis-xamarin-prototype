@@ -20,14 +20,14 @@ namespace Themis
             return new CellSealMock();
         }
 
-        public ISecureCellData BuildCypherText(byte[] cypherTextData)
+        public ISecureCellData BuildCipherText(byte[] cipherTextData)
         {
-            return new SecureCellDataMock(rawData: cypherTextData);
+            return new SecureCellDataMock(rawData: cipherTextData);
         }
 
-        public ISecureCellData BuildCypherTextFromStream(Stream cypherTextStream)
+        public ISecureCellData BuildCipherTextFromStream(Stream cipherTextStream)
         {
-            return new SecureCellDataMock(rawDataStream: cypherTextStream);
+            return new SecureCellDataMock(rawDataStream: cipherTextStream);
         }
 
         public ICellContextImprint BuildImprintKdfForMasterKey(byte[] masterKeyData)

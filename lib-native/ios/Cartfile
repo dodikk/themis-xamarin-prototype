@@ -1,4 +1,10 @@
+github "cossacklabs/themis" "0.13.2"
+
+### Avoid implicit versions for now to avoid breakign changes
+# ---
 # github "cossacklabs/themis"
 
-github "cossacklabs/themis" "0.12.1"
-github "krzyzanowskim/OpenSSL" "990bd88219da80d7a77289aeae245b3eb400d834"
+### Legacy themis v0.12.0 and older
+# ---
+# github "krzyzanowskim/OpenSSL" "990bd88219da80d7a77289aeae245b3eb400d834"
+

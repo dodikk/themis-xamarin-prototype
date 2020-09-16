@@ -8,30 +8,30 @@ namespace Themis.iOS
 {
     public class SecureCellDataIos: ISecureCellData
     {
-        public NSData CypherText => _cypherText;
+        public NSData cipherText => _cipherText;
 
         public SecureCellDataIos(
-            NSData cypherText,
-            bool shouldConsumeCypherTextObject = true)
+            NSData cipherText,
+            bool shouldConsumeCipherTextObject = true)
         {
-            if (cypherText == null) throw new ArgumentNullException(nameof(cypherText));
+            if (cipherText == null) throw new ArgumentNullException(nameof(cipherText));
 
-            _cypherText = cypherText;
-            _shouldConsumeCypherTextObject = shouldConsumeCypherTextObject;
+            _cipherText = cipherText;
+            _shouldConsumeCipherTextObject = shouldConsumeCipherTextObject;
         }
 
         public void Dispose()
         {
             try
             {
-                if (_cypherText != null)
+                if (_cipherText != null)
                 {
-                    if (_shouldConsumeCypherTextObject)
+                    if (_shouldConsumeCipherTextObject)
                     {
-                        _cypherText.Dispose();
+                        _cipherText.Dispose();
                     }
 
-                    _cypherText = null;
+                    _cipherText = null;
                 }
             }
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -45,16 +45,16 @@ namespace Themis.iOS
 
         public byte[] GetEncryptedData()
         {
-            byte[] result = ConvertUtilsIos.NSDataToByteArray(_cypherText);
+            byte[] result = ConvertUtilsIos.NSDataToByteArray(_cipherText);
             return result;
         }
 
         public Stream GetEncryptedDataAsStream()
         {
-            return _cypherText.AsStream();
+            return _cipherText.AsStream();
         }
 
-        private bool _shouldConsumeCypherTextObject;
-        private NSData _cypherText;
+        private bool _shouldConsumeCipherTextObject;
+        private NSData _cipherText;
     }
 }

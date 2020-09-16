@@ -13,7 +13,7 @@ namespace Themis
         ICellContextImprint BuildImprintKdfForMasterKey(byte[] masterKeyData);
         ICellContextImprint BuildImprintKdfForStream(Stream masterKeyStream);
 
-        ISecureCellData BuildCypherText(byte[] cypherTextData);
-        ISecureCellData BuildCypherTextFromStream(Stream cypherTextStream);
+        ISecureCellData BuildCipherText(byte[] cipherTextData);
+        ISecureCellData BuildCipherTextFromStream(Stream cipherTextStream);
     }
 }

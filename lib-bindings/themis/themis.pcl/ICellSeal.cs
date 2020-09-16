@@ -10,9 +10,9 @@ namespace Themis
     public interface ICellSeal: IDisposable
     {
         ISecureCellData WrapData(byte[] plainTextData, byte[] context = null);
-        byte[] UnwrapData(ISecureCellData cypherTextData, byte[] context = null);
+        byte[] UnwrapData(ISecureCellData cipherTextData, byte[] context = null);
 
         ISecureCellData WrapDataStream(Stream plainTextStream, Stream contextStream = null);
-        Stream UnwrapDataAsStream(ISecureCellData cypherTextData, Stream contextStream = null);
+        Stream UnwrapDataAsStream(ISecureCellData cipherTextData, Stream contextStream = null);
     }
 }

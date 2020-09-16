@@ -20,4 +20,4 @@ FOUNDATION_EXPORT double themisVersionNumber;
 //! Project version string for Themis.
 FOUNDATION_EXPORT const unsigned char themisVersionString[];
 
-#import "objcthemis/objcthemis.h"
+#import "objcthemis.h"

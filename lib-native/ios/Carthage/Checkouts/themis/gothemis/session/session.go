@@ -11,11 +11,12 @@ extern const int GOTHEMIS_SSESSION_SEND_OUTPUT_TO_PEER;
 */
 import "C"
 import (
-	"github.com/cossacklabs/themis/gothemis/errors"
-	"github.com/cossacklabs/themis/gothemis/keys"
 	"reflect"
 	"runtime"
 	"unsafe"
+
+	"github.com/cossacklabs/themis/gothemis/errors"
+	"github.com/cossacklabs/themis/gothemis/keys"
 )
 
 // Secure Session states.
@@ -32,6 +33,14 @@ const (
 	STATE_IDLE        = StateIdle
 	STATE_NEGOTIATING = StateNegotiating
 	STATE_ESTABLISHED = StateEstablished
+)
+
+// Errors returned by Secure Session.
+var (
+	ErrMissingClientID   = errors.NewWithCode(errors.InvalidParameter, "empty client ID for Secure Session")
+	ErrMissingPrivateKey = errors.NewWithCode(errors.InvalidParameter, "empty client private key for Secure Session")
+	ErrMissingMessage    = errors.NewWithCode(errors.InvalidParameter, "empty message for Secure Session")
+	ErrOverflow          = errors.NewWithCode(errors.NoMemory, "Secure Session cannot allocate enough memory")
 )
 
 // SessionCallbacks implements a delegate for SecureSession.
@@ -53,16 +62,23 @@ func finalize(ss *SecureSession) {
 	ss.Close()
 }
 
+// C returns sizes as size_t but Go expresses buffer lengths as int.
+// Make sure that all sizes are representable in Go and there is no overflows.
+func sizeOverflow(n C.size_t) bool {
+	const maxInt = int(^uint(0) >> 1)
+	return n > C.size_t(maxInt)
+}
+
 // New makes a new Secure Session with provided peer ID, private key, and callbacks.
 func New(id []byte, signKey *keys.PrivateKey, callbacks SessionCallbacks) (*SecureSession, error) {
 	ss := &SecureSession{clb: callbacks}
 
 	if nil == id || 0 == len(id) {
-		return nil, errors.New("Failed to creating secure session object with empty id")
+		return nil, ErrMissingClientID
 	}
 
 	if nil == signKey || 0 == len(signKey.Value) {
-		return nil, errors.New("Failed to creating secure session object with empty sign key")
+		return nil, ErrMissingPrivateKey
 	}
 
 	ss.ctx = C.session_init(unsafe.Pointer(&id[0]),
@@ -95,6 +111,9 @@ func (ss *SecureSession) Close() error {
 //export onPublicKeyForId
 func onPublicKeyForId(ssCtx unsafe.Pointer, idPtr unsafe.Pointer, idLen C.size_t, keyPtr unsafe.Pointer, keyLen C.size_t) int {
 	var ss *SecureSession
+	if sizeOverflow(idLen) {
+		return int(C.THEMIS_NO_MEMORY)
+	}
 	id := C.GoBytes(idPtr, C.int(idLen))
 	ss = (*SecureSession)(unsafe.Pointer(uintptr(ssCtx) - unsafe.Offsetof(ss.ctx)))
 
@@ -133,6 +152,9 @@ func (ss *SecureSession) ConnectRequest() ([]byte, error) {
 		&reqLen)) {
 		return nil, errors.New("Failed to get request size")
 	}
+	if sizeOverflow(reqLen) {
+		return nil, ErrOverflow
+	}
 
 	req := make([]byte, reqLen)
 	if !bool(C.session_connect(&ss.ctx,
@@ -149,7 +171,7 @@ func (ss *SecureSession) Wrap(data []byte) ([]byte, error) {
 	var outLen C.size_t
 
 	if nil == data || 0 == len(data) {
-		return nil, errors.New("Data was not provided")
+		return nil, ErrMissingMessage
 	}
 
 	if !bool(C.session_wrap_size(&ss.ctx,
@@ -157,6 +179,9 @@ func (ss *SecureSession) Wrap(data []byte) ([]byte, error) {
 		C.size_t(len(data)),
 		&outLen)) {
 		return nil, errors.New("Failed to get wrapped size")
+	}
+	if sizeOverflow(outLen) {
+		return nil, ErrOverflow
 	}
 
 	out := make([]byte, outLen)
@@ -177,7 +202,7 @@ func (ss *SecureSession) Unwrap(data []byte) ([]byte, bool, error) {
 	var outLen C.size_t
 
 	if nil == data || 0 == len(data) {
-		return nil, false, errors.New("Data was not provided")
+		return nil, false, ErrMissingMessage
 	}
 
 	res := C.session_unwrap_size(&ss.ctx,
@@ -191,6 +216,9 @@ func (ss *SecureSession) Unwrap(data []byte) ([]byte, bool, error) {
 		return nil, false, errors.NewCallbackError("Failed to get unwraped size (get_public_key_by_id callback error)")
 	case (C.GOTHEMIS_BUFFER_TOO_SMALL != res):
 		return nil, false, errors.New("Failed to get unwrapped size")
+	}
+	if sizeOverflow(outLen) {
+		return nil, false, ErrOverflow
 	}
 
 	out := make([]byte, outLen)
@@ -224,6 +252,9 @@ func (ss *SecureSession) GetRemoteID() ([]byte, error) {
 	}
 	if outLength == 0 {
 		return nil, errors.NewCallbackError("Incorrect remote id length (0)")
+	}
+	if sizeOverflow(outLength) {
+		return nil, ErrOverflow
 	}
 	out := make([]byte, int(outLength))
 	if C.secure_session_get_remote_id(ss.ctx.session, (*C.uint8_t)(&out[0]), &outLength) != C.THEMIS_SUCCESS {

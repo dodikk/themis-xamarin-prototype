@@ -23,15 +23,15 @@ namespace Themis
             }
         }
 
-        public byte[] UnwrapData(ISecureCellData cypherTextData, byte[] context, byte[] key)
+        public byte[] UnwrapData(ISecureCellData cipherTextData, byte[] context, byte[] key)
         {
-            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+            if (cipherTextData == null) throw new ArgumentNullException(nameof(cipherTextData));
             if (key == null) throw new ArgumentNullException(nameof(key));
             // Note: context can be null
 
             using (ICellSeal themisSeal = _builder.BuildCellSealForMasterKey(key))
             {
-                return themisSeal.UnwrapData(cypherTextData, context);
+                return themisSeal.UnwrapData(cipherTextData, context);
             }
         }
 
@@ -47,15 +47,15 @@ namespace Themis
             }
         }
 
-        public Stream UnwrapDataAsStream(ISecureCellData cypherTextData, Stream contextStream, Stream keyStream)
+        public Stream UnwrapDataAsStream(ISecureCellData cipherTextData, Stream contextStream, Stream keyStream)
         {
-            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+            if (cipherTextData == null) throw new ArgumentNullException(nameof(cipherTextData));
             if (keyStream == null) throw new ArgumentNullException(nameof(keyStream));
             // Note: context can be null
 
             using (ICellSeal themisSeal = _builder.BuildCellSealForMasterKeyStream(keyStream))
             {
-                return themisSeal.UnwrapDataAsStream(cypherTextData, contextStream);
+                return themisSeal.UnwrapDataAsStream(cipherTextData, contextStream);
             }
         }
 
