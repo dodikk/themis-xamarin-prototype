@@ -6,23 +6,23 @@ namespace Themis.Droid
 {
     public class SecureCellDataDroid: ISecureCellData
     {
-        public SecureCellData SecureCellDataJava => _cypherTextHandle;
+        public SecureCellData SecureCellDataJava => _cipherTextHandle;
 
-        public SecureCellDataDroid(SecureCellData cypherTextHandle)
+        public SecureCellDataDroid(SecureCellData cipherTextHandle)
         {
-            if (cypherTextHandle == null) throw new ArgumentNullException(nameof(cypherTextHandle));
+            if (cipherTextHandle == null) throw new ArgumentNullException(nameof(cipherTextHandle));
 
-            _cypherTextHandle = cypherTextHandle;
+            _cipherTextHandle = cipherTextHandle;
         }
 
         public void Dispose()
         {
             try
             {
-                if (_cypherTextHandle != null)
+                if (_cipherTextHandle != null)
                 {
-                    _cypherTextHandle.Dispose();
-                    _cypherTextHandle = null;
+                    _cipherTextHandle.Dispose();
+                    _cipherTextHandle = null;
                 }
             }
 #pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
@@ -38,7 +38,7 @@ namespace Themis.Droid
         {
             try
             {
-                byte[] result = _cypherTextHandle.GetProtectedData();
+                byte[] result = _cipherTextHandle.GetProtectedData();
                 return result;
             }
             catch (Exception ex)
@@ -57,6 +57,6 @@ namespace Themis.Droid
             return result;
         }
 
-        private SecureCellData _cypherTextHandle;
+        private SecureCellData _cipherTextHandle;
     }
 }

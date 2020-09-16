@@ -43,31 +43,31 @@ namespace Themis.Droid
             return result;
         }
 
-        public ISecureCellData BuildCypherTextFromStream(Stream cypherTextStream)
+        public ISecureCellData BuildCipherTextFromStream(Stream cipherTextStream)
         {
-            if (cypherTextStream == null) throw new ArgumentNullException(nameof(cypherTextStream));
+            if (cipherTextStream == null) throw new ArgumentNullException(nameof(cipherTextStream));
 
-            byte[] cypherTextStreamBytes = ConvertUtilsPortable.StreamToByteArray(cypherTextStream);
+            byte[] cipherTextStreamBytes = ConvertUtilsPortable.StreamToByteArray(cipherTextStream);
 
             var wrappedStreamData =
                 new SecureCellData(
-                    protectedData: cypherTextStreamBytes,
+                    protectedData: cipherTextStreamBytes,
                     additionalData: null);
 
-            var result = new SecureCellDataDroid(cypherTextHandle: null);
+            var result = new SecureCellDataDroid(cipherTextHandle: null);
             return result;
         }
 
-        public ISecureCellData BuildCypherText(byte[] cypherTextData)
+        public ISecureCellData BuildCipherText(byte[] cipherTextData)
         {
-            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+            if (cipherTextData == null) throw new ArgumentNullException(nameof(cipherTextData));
 
             var wrappedStreamData =
                 new SecureCellData(
-                    protectedData: cypherTextData,
+                    protectedData: cipherTextData,
                     additionalData: null);
 
-            var result = new SecureCellDataDroid(cypherTextHandle: wrappedStreamData);
+            var result = new SecureCellDataDroid(cipherTextHandle: wrappedStreamData);
             return result;
         }
 
