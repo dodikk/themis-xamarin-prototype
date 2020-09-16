@@ -47,17 +47,30 @@ namespace Themis.Droid
         {
             if (cipherTextData == null) throw new ArgumentNullException(nameof(cipherTextData));
 
-            var castedCipherTextData = cipherTextData as SecureCellDataDroid;
-            if (castedCipherTextData == null)
+            byte[] cipherTextBytes;
+            var managedCipherTextData = cipherTextData as SecureCellDataMock;
+            var droidCipherTextData = cipherTextData as SecureCellDataDroid;
+
+
+            if (managedCipherTextData != null)
+            {
+                cipherTextBytes = managedCipherTextData.GetEncryptedData();
+            }
+            else if (droidCipherTextData != null)
+            {
+                cipherTextBytes = droidCipherTextData.GetEncryptedData();
+            }
+            else
             {
                 throw new ArgumentException(
-                    message: $"Type mismatch: {cipherTextData.GetType()} received. Expected: {typeof(SecureCellDataDroid)}",
+                    message: $"Type mismatch: {cipherTextData.GetType()} received. Expected: [ {typeof(SecureCellDataDroid)} ; {typeof(SecureCellDataMock)} ] ",
                     paramName: nameof(cipherTextData));
             }
 
+
             try
             {
-                byte[] result = _secureCell.Decrypt(castedCipherTextData.GetEncryptedData(), context);
+                byte[] result = _secureCell.Decrypt(cipherTextBytes, context);
 
                 return result;
             }
