@@ -1,5 +1,9 @@
 The project depends on `themis` library binaries.
-The version has been pinned to `v0.12.0`
+The version has been pinned to `v0.13.2`.
+
+Other versions can be found in tags and branches
+* `v0.13.2`
+* `v0.12.0`
 
 ### How to build and run
 
