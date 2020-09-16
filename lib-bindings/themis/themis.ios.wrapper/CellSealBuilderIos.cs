@@ -46,22 +46,22 @@ namespace Themis.iOS
             return result;
         }
 
-        public ISecureCellData BuildCypherText(byte[] cypherTextData)
+        public ISecureCellData BuildCipherText(byte[] cipherTextData)
         {
-            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+            if (cipherTextData == null) throw new ArgumentNullException(nameof(cipherTextData));
 
-            NSData cypherTextNsdata = ConvertUtilsIos.ByteArrayToNSData(cypherTextData);
-            var result = new SecureCellDataIos(cypherText: cypherTextNsdata);
+            NSData cipherTextNsdata = ConvertUtilsIos.ByteArrayToNSData(cipherTextData);
+            var result = new SecureCellDataIos(cipherText: cipherTextNsdata);
 
             return result;
         }
 
-        public ISecureCellData BuildCypherTextFromStream(Stream cypherTextStream)
+        public ISecureCellData BuildCipherTextFromStream(Stream cipherTextStream)
         {
-            if (cypherTextStream == null) throw new ArgumentNullException(nameof(cypherTextStream));
+            if (cipherTextStream == null) throw new ArgumentNullException(nameof(cipherTextStream));
 
-            NSData cypherTextNsdata = ConvertUtilsIos.StreamToNSData(cypherTextStream);
-            var result = new SecureCellDataIos(cypherText: cypherTextNsdata);
+            NSData cipherTextNsdata = ConvertUtilsIos.StreamToNSData(cipherTextStream);
+            var result = new SecureCellDataIos(cipherText: cipherTextNsdata);
 
             return result;
         }

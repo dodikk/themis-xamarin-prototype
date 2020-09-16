@@ -7,7 +7,7 @@ namespace Themis.Droid
     {
 		public byte[] Decrypt(
 	        byte[] key,
-	        byte[] cypherTextDataWithTagSuffix,
+	        byte[] cipherTextDataWithTagSuffix,
 	        AesGcmBlockCipherConfig options)
 		{
             using (var cipher = Javax.Crypto.Cipher.GetInstance("AES/GCM/NoPadding"))
@@ -25,7 +25,7 @@ namespace Themis.Droid
                     key: adaptedKey,
                     @params: adaptedOptions);
 
-                byte[] resultPlainText = cipher.DoFinal(input: cypherTextDataWithTagSuffix);
+                byte[] resultPlainText = cipher.DoFinal(input: cipherTextDataWithTagSuffix);
                 return resultPlainText;
             }
         }
@@ -52,8 +52,8 @@ namespace Themis.Droid
 
 
                 
-                byte[] cypherTextDataWithTagSuffix = cipher.DoFinal(input: plainTextData);
-                return cypherTextDataWithTagSuffix;
+                byte[] cipherTextDataWithTagSuffix = cipher.DoFinal(input: plainTextData);
+                return cipherTextDataWithTagSuffix;
             }
 		}
     }

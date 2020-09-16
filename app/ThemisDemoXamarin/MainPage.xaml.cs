@@ -51,7 +51,7 @@ namespace ThemisDemoXamarin
                 // encrypt
                 // ===
                 Console.WriteLine("[themis demo forms] Encrypting...");
-                using (ISecureCellData cypherText =
+                using (ISecureCellData cipherText =
                     cellSeal.WrapData(
                         plainTextData: plainTextMessageData,
                         context: null))
@@ -62,17 +62,17 @@ namespace ThemisDemoXamarin
 
                     // print encrypted data
                     // ====
-                    byte[] encryptedData = cypherText.GetEncryptedData();
-                    char[] cypherTextChars = encryptedData.Select(b => (char)b).ToArray();
-                    string cypherTextBase64 = Convert.ToBase64String(encryptedData);
+                    byte[] encryptedData = cipherText.GetEncryptedData();
+                    char[] cipherTextChars = encryptedData.Select(b => (char)b).ToArray();
+                    string cipherTextBase64 = Convert.ToBase64String(encryptedData);
 
-                    string txtCypherText =
+                    string txtCipherText =
                         new string(
-                            value: cypherTextChars,
+                            value: cipherTextChars,
                             startIndex: 0,
-                            length: cypherTextChars.Length);
-                    Console.WriteLine($"[themis demo forms] Cypher Text: {txtCypherText}");
-                    Console.WriteLine($"[themis demo forms] Cypher Text base64: {cypherTextBase64}");
+                            length: cipherTextChars.Length);
+                    Console.WriteLine($"[themis demo forms] cipher Text: {txtCipherText}");
+                    Console.WriteLine($"[themis demo forms] cipher Text base64: {cipherTextBase64}");
 
 
 
@@ -80,7 +80,7 @@ namespace ThemisDemoXamarin
                     // ===
                     byte[] decryptedData =
                         cellSeal.UnwrapData(
-                            cypherTextData: cypherText,
+                            cipherTextData: cipherText,
                             context: null);
                     char[] decryptedDataChars = decryptedData.Select(b => (char)b).ToArray();
                     string decryptedDataBase64 = Convert.ToBase64String(decryptedData);

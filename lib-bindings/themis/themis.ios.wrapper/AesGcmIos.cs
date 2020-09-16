@@ -11,7 +11,7 @@ namespace Themis.iOS
 
         public byte[] Decrypt(
             byte[] key,
-            byte[] cypherTextDataWithTagSuffix,
+            byte[] cipherTextDataWithTagSuffix,
             AesGcmBlockCipherConfig options)
         {
             if (options.TagLengthInBits < BitsInSingleByte)
@@ -21,18 +21,18 @@ namespace Themis.iOS
             int tagSizeInBytes = options.TagLengthInBits / BitsInSingleByte;
 
 
-            int ciphertextLength = cypherTextDataWithTagSuffix.Length - tagSizeInBytes;
+            int ciphertextLength = cipherTextDataWithTagSuffix.Length - tagSizeInBytes;
             if (ciphertextLength <= 0)
             {
                 throw new ArgumentException(nameof(options.TagLengthInBits));
             }
 
 
-            byte[] cypherTextData = cypherTextDataWithTagSuffix.AsSpan(
+            byte[] cipherTextData = cipherTextDataWithTagSuffix.AsSpan(
                 start: 0,
                 length: ciphertextLength).ToArray();
 
-            byte[] tagData = cypherTextDataWithTagSuffix.AsSpan(
+            byte[] tagData = cipherTextDataWithTagSuffix.AsSpan(
                 start: ciphertextLength,
                 length: tagSizeInBytes).ToArray();
 
@@ -48,13 +48,13 @@ namespace Themis.iOS
             byte[] outPlainText =
                 (byte[])Array.CreateInstance(
                     elementType: typeof(byte),
-                    length: cypherTextData.Length);
+                    length: cipherTextData.Length);
 
             using (var cipher = new AesGcm(key: key))
             {
                 cipher.Decrypt(
                     nonce: options.InitializationVector,
-                    ciphertext: cypherTextData,
+                    ciphertext: cipherTextData,
                     tag: tagData,
                     plaintext: outPlainText,
                     associatedData: null);
