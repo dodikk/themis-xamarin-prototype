@@ -69,9 +69,9 @@ namespace ThemisDemoXamarin.iOS
                 encryptedMessage.GetBase64EncodedString(options: NSDataBase64EncodingOptions.None);
 
             // NSString.FromData returns null
-            // NSString rawCyphertext = NSString.FromData(encryptedMessage, encoding: NSStringEncoding.UTF8);
-            Console.WriteLine($"Cyphertext: <cannot be printed from NSData in Xamarin.iOS> | probably a security measure by themis team");
-            Console.WriteLine($"Cyphertext base64: {txtEncryptedMessage}");
+            // NSString rawciphertext = NSString.FromData(encryptedMessage, encoding: NSStringEncoding.UTF8);
+            Console.WriteLine($"ciphertext: <cannot be printed from NSData in Xamarin.iOS> | probably a security measure by themis team");
+            Console.WriteLine($"ciphertext base64: {txtEncryptedMessage}");
 
 
             Console.WriteLine("Decrypting...");
@@ -112,9 +112,9 @@ namespace ThemisDemoXamarin.iOS
             return encryptedMessage;
         }
 
-        private string DoDecrypt(TSCellSeal withCellSeal, NSData cypherText)
+        private string DoDecrypt(TSCellSeal withCellSeal, NSData cipherText)
         {
-            if (null == cypherText)
+            if (null == cipherText)
             {
                 return null;
             }
@@ -126,7 +126,7 @@ namespace ThemisDemoXamarin.iOS
             NSError themisError = null;
             NSData plainTextData =
                 cellSeal.UnwrapData(
-                    message: cypherText,
+                    message: cipherText,
                     error: out themisError);
 
             if (null != themisError)

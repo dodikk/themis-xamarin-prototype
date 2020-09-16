@@ -44,17 +44,17 @@ namespace Themis.iOS
         }
 
         public byte[] UnwrapData(
-            ISecureCellData cypherTextData,
+            ISecureCellData cipherTextData,
             byte[] context = null)
         {
-            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+            if (cipherTextData == null) throw new ArgumentNullException(nameof(cipherTextData));
 
-            var castedCypherTextData = cypherTextData as SecureCellDataIos;
-            if (null == castedCypherTextData)
+            var castedCipherTextData = cipherTextData as SecureCellDataIos;
+            if (null == castedCipherTextData)
             {
                 throw new ArgumentException(
-                    message: $"Type mismatch: {cypherTextData.GetType()} received. Expected: {typeof(SecureCellDataIos)}",
-                    paramName: nameof(cypherTextData));
+                    message: $"Type mismatch: {cipherTextData.GetType()} received. Expected: {typeof(SecureCellDataIos)}",
+                    paramName: nameof(cipherTextData));
             }
 
 
@@ -67,7 +67,7 @@ namespace Themis.iOS
             {
                 plainTextData =
                     _implCellSeal.UnwrapData(
-                        message: castedCypherTextData.CypherText,
+                        message: castedCipherTextData.cipherText,
                         context: nsContextData,
                         error: out themisError);
             }
@@ -96,7 +96,7 @@ namespace Themis.iOS
             if (plainTextData == null) throw new ArgumentNullException(nameof(plainTextData));
 
             NSError themisError = null;
-            NSData cypherText = null;
+            NSData cipherText = null;
 
             NSData nsPlainTextData = ConvertUtilsIos.ByteArrayToNSData(plainTextData);
             NSData nsContextData = ConvertUtilsIos.ByteArrayToNSData(context);
@@ -104,7 +104,7 @@ namespace Themis.iOS
             
             try
             {
-                cypherText =
+                cipherText =
                     _implCellSeal.WrapData(
                         message: nsPlainTextData,
                         context: nsContextData,
@@ -125,8 +125,8 @@ namespace Themis.iOS
 
             var result =
                 new SecureCellDataIos(
-                    cypherText: cypherText,
-                    shouldConsumeCypherTextObject: true);
+                    cipherText: cipherText,
+                    shouldConsumeCipherTextObject: true);
 
             return result;
         }
@@ -149,13 +149,13 @@ namespace Themis.iOS
         }
 
         public Stream UnwrapDataAsStream(
-            ISecureCellData cypherTextData,
+            ISecureCellData cipherTextData,
             Stream contextStream = null)
         {
-            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+            if (cipherTextData == null) throw new ArgumentNullException(nameof(cipherTextData));
 
             byte[] contextBytes = ConvertUtilsPortable.StreamToByteArray(contextStream);
-            byte[] resultBytes = UnwrapData(cypherTextData, context: contextBytes);
+            byte[] resultBytes = UnwrapData(cipherTextData, context: contextBytes);
 
             var result = ConvertUtilsPortable.ByteArrayToMemoryStream(resultBytes);
 

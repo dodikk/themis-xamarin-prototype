@@ -12,7 +12,7 @@ namespace Themis.Droid
 
             try
             {
-                _secureCell = new SecureCell(key: masterKeyData);
+                _secureCell = SecureCell.SealWithKey(masterKeyData);
             }
             catch (Exception ex)
             {
@@ -42,25 +42,35 @@ namespace Themis.Droid
         }
 
         public byte[] UnwrapData(
-            ISecureCellData cypherTextData,
+            ISecureCellData cipherTextData,
             byte[] context = null)
         {
-            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+            if (cipherTextData == null) throw new ArgumentNullException(nameof(cipherTextData));
 
-            var castedCypherTextData = cypherTextData as SecureCellDataDroid;
-            if (castedCypherTextData == null)
+            byte[] cipherTextBytes;
+            var managedCipherTextData = cipherTextData as SecureCellDataMock;
+            var droidCipherTextData = cipherTextData as SecureCellDataDroid;
+
+
+            if (managedCipherTextData != null)
+            {
+                cipherTextBytes = managedCipherTextData.GetEncryptedData();
+            }
+            else if (droidCipherTextData != null)
+            {
+                cipherTextBytes = droidCipherTextData.GetEncryptedData();
+            }
+            else
             {
                 throw new ArgumentException(
-                    message: $"Type mismatch: {cypherTextData.GetType()} received. Expected: {typeof(SecureCellDataDroid)}",
-                    paramName: nameof(cypherTextData));
+                    message: $"Type mismatch: {cipherTextData.GetType()} received. Expected: [ {typeof(SecureCellDataDroid)} ; {typeof(SecureCellDataMock)} ] ",
+                    paramName: nameof(cipherTextData));
             }
+
 
             try
             {
-                byte[] result =
-                    _secureCell.Unprotect(
-                        context: context,
-                        protectedData: castedCypherTextData.SecureCellDataJava);
+                byte[] result = _secureCell.Decrypt(cipherTextBytes, context);
 
                 return result;
             }
@@ -80,12 +90,9 @@ namespace Themis.Droid
 
             try
             {
-                SecureCellData cypherTextHandle =
-                    _secureCell.Protect(
-                        context: context,
-                        data: plainTextData);
+                byte[] cipherText = _secureCell.Encrypt(plainTextData, context);
 
-                var result = new SecureCellDataDroid(cypherTextHandle);
+                var result = new SecureCellDataMock(cipherText);
 
                 return result;
             }
@@ -106,28 +113,25 @@ namespace Themis.Droid
             byte[] plainTextBytes = ConvertUtilsPortable.StreamToByteArray(plainTextStream);
             byte[] contextBytes = ConvertUtilsPortable.StreamToByteArray(contextStream);
 
-            var result =
-                WrapData(
-                    plainTextData: plainTextBytes,
-                    context: contextBytes);
+            var result = WrapData(plainTextBytes, context: contextBytes);
 
             return result;
         }
 
         public Stream UnwrapDataAsStream(
-            ISecureCellData cypherTextData,
+            ISecureCellData cipherTextData,
             Stream contextStream = null)
         {
-            if (cypherTextData == null) throw new ArgumentNullException(nameof(cypherTextData));
+            if (cipherTextData == null) throw new ArgumentNullException(nameof(cipherTextData));
 
             byte[] contextBytes = ConvertUtilsPortable.StreamToByteArray(contextStream);
-            byte[] resultBytes = UnwrapData(cypherTextData, context: contextBytes);
+            byte[] resultBytes = UnwrapData(cipherTextData, context: contextBytes);
 
             var result = ConvertUtilsPortable.ByteArrayToMemoryStream(resultBytes);
 
             return result;
         }
 
-        private SecureCell _secureCell;
+        private SecureCell.ISeal _secureCell;
     }
 }
