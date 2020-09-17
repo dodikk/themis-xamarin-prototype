@@ -48,7 +48,7 @@ namespace Themis.Droid
             if (cipherTextData == null) throw new ArgumentNullException(nameof(cipherTextData));
 
             byte[] cipherTextBytes;
-            var managedCipherTextData = cipherTextData as SecureCellDataMock;
+            var managedCipherTextData = cipherTextData as SecureCellDataManaged;
             var droidCipherTextData = cipherTextData as SecureCellDataDroid;
 
 
@@ -63,7 +63,7 @@ namespace Themis.Droid
             else
             {
                 throw new ArgumentException(
-                    message: $"Type mismatch: {cipherTextData.GetType()} received. Expected: [ {typeof(SecureCellDataDroid)} ; {typeof(SecureCellDataMock)} ] ",
+                    message: $"Type mismatch: {cipherTextData.GetType()} received. Expected: [ {typeof(SecureCellDataDroid)} ; {typeof(SecureCellDataManaged)} ] ",
                     paramName: nameof(cipherTextData));
             }
 
@@ -92,7 +92,7 @@ namespace Themis.Droid
             {
                 byte[] cipherText = _secureCell.Encrypt(plainTextData, context);
 
-                var result = new SecureCellDataMock(cipherText);
+                var result = new SecureCellDataManaged(cipherText);
 
                 return result;
             }

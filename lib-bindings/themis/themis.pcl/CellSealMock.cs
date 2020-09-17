@@ -28,14 +28,14 @@ namespace Themis
         {
             // no encryption since it's a mock
             // -
-            return new SecureCellDataMock(plainTextData);
+            return new SecureCellDataManaged(plainTextData);
         }
 
         public ISecureCellData WrapDataStream(Stream plainTextStream, Stream contextStream = null)
         {
             // no encryption since it's a mock
             // -
-            return new SecureCellDataMock(plainTextStream);
+            return new SecureCellDataManaged(plainTextStream);
         }
     }
 }
