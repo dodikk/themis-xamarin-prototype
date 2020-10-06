@@ -35,6 +35,22 @@ Do not commit binaries and artefacts to your repo
 * Carthage directory binary contents
 *  *.aar packages
 
+## Known issues
+
+Build artefact optimizer of Xamarin.Forms or Xamarin.Android might strip native Java classes from the binding lib
+For example:
+```
+Java.Lang.IncompatibleClassChangeError: no non-static method "Lcom/cossacklabs/themis/SecureCellSeal;.decrypt([B[B)[B"
+[orion.mobile]   at Java.Interop.JniEnvironment+InstanceMethods.GetMethodID (Java.Interop.JniObjectReference type, System.String name, System.String signature) [0x0005b] in <42d2b7086f0a46efb99253c5db1ecca9>:0 
+[orion.mobile]   at Android.Runtime.JNIEnv.GetMethodID (System.IntPtr kls, System.String name, System.String signature) [0x00007] in <3080427739614e60a939a88bf3f838d5>:0 
+[orion.mobile]   at Com.Cossacklabs.Themis.SecureCell+ISealInvoker.Decrypt (System.Byte[] p0, System.Byte[] p1) [0x00017] in <cd618986d1ce4194b63cdd3366dad291>:0 
+[orion.mobile]   at Themis.Droid.CellSealDroid.UnwrapData (Themis.ISecureCellData cipherTextData, System.Byte[] context) [0x0007e] in <a492e7118e094c3296442a386fe5d80e>:0 
+[orion.mobile]    --- End of inner exception stack trace ---
+```
+
+Most relevant resources for troubleshooting found so far:
+* https://gist.github.com/JonDouglas/dda6d8ace7d071b0e8cb
+* https://stackoverflow.com/questions/38967851/missing-methods-and-classes-in-jar-after-building-xamarin-app
 
 ---
 
