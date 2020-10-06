@@ -67,7 +67,7 @@ namespace Themis.iOS
             {
                 plainTextData =
                     _implCellSeal.UnwrapData(
-                        message: castedCipherTextData.cipherText,
+                        message: castedCipherTextData.CipherText,
                         context: nsContextData,
                         error: out themisError);
             }
