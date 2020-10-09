@@ -32,6 +32,10 @@ namespace Themis.iOS
             {
                 throw new ThemisXamarinBridgeException(
                     message: "[FAIL] [iOS] CellSealBuilderIos.BuildCellSealForMasterKey()",
+                    dataAsHex: null,
+                    contextAsHex: null,
+                    dataAsBase64: null,
+                    contextAsBase64: null,
                     inner: ex);
             }
         }

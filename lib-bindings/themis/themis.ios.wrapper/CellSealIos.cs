@@ -39,6 +39,10 @@ namespace Themis.iOS
             {
                 throw new ThemisXamarinBridgeException(
                     message: "TSCellSeal constructor has failed",
+                    dataAsHex: null,
+                    contextAsHex: null,
+                    dataAsBase64: null,
+                    contextAsBase64: null,
                     inner: ex);
             }
         }
@@ -67,7 +71,7 @@ namespace Themis.iOS
             {
                 plainTextData =
                     _implCellSeal.UnwrapData(
-                        message: castedCipherTextData.cipherText,
+                        message: castedCipherTextData.CipherText,
                         context: nsContextData,
                         error: out themisError);
             }
@@ -75,6 +79,10 @@ namespace Themis.iOS
             {
                 throw new ThemisXamarinBridgeException(
                     message: "TSCellSeal.UnwrapData() has failed",
+                    dataAsHex: ConvertUtilsPortable.ByteArrayToHexString(cipherTextData.GetEncryptedData()),
+                    contextAsHex: ConvertUtilsPortable.ByteArrayToHexString(context),
+                    dataAsBase64: Convert.ToBase64String(cipherTextData.GetEncryptedData()),
+                    contextAsBase64: Convert.ToBase64String(context),
                     inner: ex);
             }
 
@@ -114,6 +122,10 @@ namespace Themis.iOS
             {
                 throw new ThemisXamarinBridgeException(
                     message: "TSCellSeal.WrapData() has failed",
+                    dataAsHex: null, // to avoid leaking plain text
+                    contextAsHex: ConvertUtilsPortable.ByteArrayToHexString(context),
+                    dataAsBase64: null, // to avoid leaking plain text
+                    contextAsBase64: Convert.ToBase64String(context),
                     inner: ex);
             }
 

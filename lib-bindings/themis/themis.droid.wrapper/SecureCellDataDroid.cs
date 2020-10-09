@@ -45,6 +45,10 @@ namespace Themis.Droid
             {
                 throw new ThemisXamarinBridgeException(
                     message: "[FAIL] [droid] SecureCellData.GetProtectedData() java method failed",
+                    dataAsHex: null,
+                    contextAsHex: null,
+                    dataAsBase64: null,
+                    contextAsBase64: null,
                     inner: ex);
             }
         }
