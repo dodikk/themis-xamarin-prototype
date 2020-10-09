@@ -29,6 +29,10 @@ namespace Themis.Droid
             {
                 throw new ThemisXamarinBridgeException(
                     message: "[FAIL] [droid] CellSealBuilderDroid.BuildCellSealForMasterKey()",
+                    dataAsHex: null,
+                    contextAsHex: null,
+                    dataAsBase64: null,
+                    contextAsBase64: null,
                     inner: ex);
             }
         }
@@ -51,8 +55,8 @@ namespace Themis.Droid
 
             var wrappedStreamData =
                 new SecureCellData(
-                    protectedData: cipherTextStreamBytes,
-                    additionalData: null);
+                    /*protectedData:*/ cipherTextStreamBytes,
+                    /*additionalData:*/ null);
 
             var result = new SecureCellDataDroid(cipherTextHandle: null);
             return result;
@@ -64,8 +68,8 @@ namespace Themis.Droid
 
             var wrappedStreamData =
                 new SecureCellData(
-                    protectedData: cipherTextData,
-                    additionalData: null);
+                    /*protectedData:*/ cipherTextData,
+                    /*additionalData:*/ null);
 
             var result = new SecureCellDataDroid(cipherTextHandle: wrappedStreamData);
             return result;

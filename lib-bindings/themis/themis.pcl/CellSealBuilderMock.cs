@@ -22,12 +22,12 @@ namespace Themis
 
         public ISecureCellData BuildCipherText(byte[] cipherTextData)
         {
-            return new SecureCellDataMock(rawData: cipherTextData);
+            return new SecureCellDataManaged(rawData: cipherTextData);
         }
 
         public ISecureCellData BuildCipherTextFromStream(Stream cipherTextStream)
         {
-            return new SecureCellDataMock(rawDataStream: cipherTextStream);
+            return new SecureCellDataManaged(rawDataStream: cipherTextStream);
         }
 
         public ICellContextImprint BuildImprintKdfForMasterKey(byte[] masterKeyData)

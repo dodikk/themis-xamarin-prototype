@@ -8,7 +8,7 @@ namespace Themis.iOS
 {
     public class SecureCellDataIos: ISecureCellData
     {
-        public NSData cipherText => _cipherText;
+        public NSData CipherText => _cipherText;
 
         public SecureCellDataIos(
             NSData cipherText,

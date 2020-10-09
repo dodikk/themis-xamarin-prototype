@@ -3,14 +3,14 @@
 
 namespace Themis
 {
-    public class SecureCellDataMock: ISecureCellData
+    public class SecureCellDataManaged: ISecureCellData
     {
-        public SecureCellDataMock(byte[] rawData)
+        public SecureCellDataManaged(byte[] rawData)
         {
             _rawData = rawData;
         }
 
-        public SecureCellDataMock(Stream rawDataStream)
+        public SecureCellDataManaged(Stream rawDataStream)
         {
             _rawData = ConvertUtilsPortable.StreamToByteArray(rawDataStream);
         }
