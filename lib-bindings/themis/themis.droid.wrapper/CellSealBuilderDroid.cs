@@ -29,6 +29,10 @@ namespace Themis.Droid
             {
                 throw new ThemisXamarinBridgeException(
                     message: "[FAIL] [droid] CellSealBuilderDroid.BuildCellSealForMasterKey()",
+                    dataAsHex: null,
+                    contextAsHex: null,
+                    dataAsBase64: null,
+                    contextAsBase64: null,
                     inner: ex);
             }
         }

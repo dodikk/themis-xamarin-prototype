@@ -82,5 +82,16 @@ namespace Themis
 
             return result;
         }
+
+        public static string ByteArrayToHexString(byte[] data)
+        {
+            if (data == null)
+            {
+                return null;
+            }
+
+            string result = BitConverter.ToString(data).Replace("-", string.Empty);
+            return result;
+        }
     }
 }

@@ -18,6 +18,10 @@ namespace Themis.Droid
             {
                 throw new ThemisXamarinBridgeException(
                     message: "[FAIL] [droid] SecureCell java constructor failed",
+                    dataAsHex: null,
+                    contextAsHex: null,
+                    dataAsBase64: null,
+                    contextAsBase64: null,
                     inner: ex);
             }
         }
@@ -78,6 +82,10 @@ namespace Themis.Droid
             {
                 throw new ThemisXamarinBridgeException(
                     message: "[FAIL] [droid] SecureCell.Unprotect() java method failed",
+                    dataAsHex: ConvertUtilsPortable.ByteArrayToHexString(cipherTextBytes),
+                    contextAsHex: ConvertUtilsPortable.ByteArrayToHexString(context),
+                    dataAsBase64: Convert.ToBase64String(cipherTextBytes),
+                    contextAsBase64: Convert.ToBase64String(context),
                     inner: ex);
             }
         }
@@ -100,6 +108,10 @@ namespace Themis.Droid
             {
                 throw new ThemisXamarinBridgeException(
                     message: "[FAIL] [droid] SecureCell.Protect() java method failed",
+                    dataAsHex: null, // avoid leaking plain text in logs
+                    contextAsHex: ConvertUtilsPortable.ByteArrayToHexString(context), // seems ok to log context
+                    dataAsBase64: null, // avoid leaking plain text in logs
+                    contextAsBase64: Convert.ToBase64String(context),
                     inner: ex);
             }
         }
