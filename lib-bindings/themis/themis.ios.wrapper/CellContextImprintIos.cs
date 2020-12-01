@@ -61,6 +61,10 @@ namespace Themis.iOS
             {
                 throw new ThemisXamarinBridgeException(
                     message: "[FAILED] TSCellContextImprint.WrapData()",
+                    dataAsHex: null,
+                    contextAsHex: null,
+                    dataAsBase64: null,
+                    contextAsBase64: null,
                     inner: ex);
             }
 

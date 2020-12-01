@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.IO;
 
 
@@ -80,6 +81,17 @@ namespace Themis
                     startIndex: 0,
                     length: stringAsTextChars.Length);
 
+            return result;
+        }
+
+        public static string ByteArrayToHexString(byte[] data)
+        {
+            if (data == null)
+            {
+                return null;
+            }
+
+            string result = BitConverter.ToString(data).Replace("-", string.Empty);
             return result;
         }
     }
