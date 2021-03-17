@@ -13,7 +13,7 @@
 		7E06A545260272C500C7E627 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E06A544260272C500C7E627 /* Assets.xcassets */; };
 		7E06A548260272C500C7E627 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E06A547260272C500C7E627 /* Preview Assets.xcassets */; };
 		7E06A54B260272C500C7E627 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E06A549260272C500C7E627 /* LaunchScreen.storyboard */; };
-		7E06A5542602735000C7E627 /* themis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E06A5532602735000C7E627 /* themis.framework */; };
+		7E06A5742602829100C7E627 /* themis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E06A5732602829100C7E627 /* themis.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +25,7 @@
 		7E06A547260272C500C7E627 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7E06A54A260272C500C7E627 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E06A54C260272C500C7E627 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7E06A5532602735000C7E627 /* themis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = themis.framework; path = "../../lib-native/ios/Carthage/Build/iOS/themis.framework"; sourceTree = "<group>"; };
+		7E06A5732602829100C7E627 /* themis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = themis.framework; path = Frameworks/themis.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E06A5542602735000C7E627 /* themis.framework in Frameworks */,
+				7E06A5742602829100C7E627 /* themis.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,7 +43,7 @@
 		7E06A532260272BF00C7E627 = {
 			isa = PBXGroup;
 			children = (
-				7E06A5532602735000C7E627 /* themis.framework */,
+				7E06A56626027F1500C7E627 /* Frameworks */,
 				7E06A53D260272C000C7E627 /* ThemisDemoNative */,
 				7E06A53C260272C000C7E627 /* Products */,
 			);
@@ -79,6 +79,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		7E06A56626027F1500C7E627 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E06A5732602829100C7E627 /* themis.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,6 +97,7 @@
 				7E06A537260272C000C7E627 /* Sources */,
 				7E06A538260272C000C7E627 /* Frameworks */,
 				7E06A539260272C000C7E627 /* Resources */,
+				7E06A55C2602779C00C7E627 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -143,6 +152,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7E06A55C2602779C00C7E627 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Frameworks/themis.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/themis.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7E06A537260272C000C7E627 /* Sources */ = {
@@ -290,9 +322,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ThemisDemoNative/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = ThemisDemoNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -300,6 +339,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.dodikk.ThemisDemoNative.ThemisDemoNative;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -310,9 +350,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ThemisDemoNative/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = ThemisDemoNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -320,6 +367,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.dodikk.ThemisDemoNative.ThemisDemoNative;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
