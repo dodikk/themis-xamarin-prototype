@@ -1,21 +1,10 @@
 {
-  "Mac" : [
-    {
-      "name" : "themis",
-      "hash" : "0414d930973aff3f34926d697922963343e21090e1e0b0adce19d25d005d4c0e"
-    }
-  ],
-  "watchOS" : [
-
-  ],
-  "tvOS" : [
-
-  ],
-  "commitish" : "0.13.2",
+  "commitish" : "0.13.6",
   "iOS" : [
     {
       "name" : "themis",
-      "hash" : "be50ececa00ed25863d4044e2700201a7f87de70e21d74aebb4bada4e2cbc61d"
+      "hash" : "cf64d604c4aefe4e44a5d6f911d4cfeb388a127af53ec88a4617ebc57d0a2b6f",
+      "linking" : "dynamic"
     }
   ]
 }

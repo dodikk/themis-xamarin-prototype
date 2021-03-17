@@ -8,11 +8,12 @@
   "tvOS" : [
 
   ],
-  "commitish" : "1.1.107",
+  "commitish" : "1.1.10802",
   "iOS" : [
     {
       "name" : "openssl",
-      "hash" : "96143570190c4fcfc108ba750091cb16cc796126df2a9a4f0b8195662d770026"
+      "hash" : "b8f38fefde3f2b78c6f51b0b918541ccd5c55e5f71765a8122ffab670238e43d",
+      "linking" : "dynamic"
     }
   ]
 }

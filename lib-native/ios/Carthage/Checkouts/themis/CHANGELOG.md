@@ -4,6 +4,70 @@
 
 Changes that are currently in development and have not been released yet.
 
+
+## [0.13.6](https://github.com/cossacklabs/themis/releases/tag/0.13.6), November 23th 2020
+
+**Hotfix for Apple platforms:**
+
+- `themis` pod is now restored to use *dynamic* linkage again
+- Resolved errors related to `@rpath` when using CocoaPods
+- Removed `arm64e` architecture slice from Carthage builds for iOS which prevented CocoaPods from functioning correctly
+
+_Code:_
+
+- **Objective-C / Swift**
+
+  - CocoaPods will now again link ObjCThemis *dynamically* into application ([#750](https://github.com/cossacklabs/themis/pull/750)).
+  - Carthage no longer builds `arm64e` architecture slice ([#750](https://github.com/cossacklabs/themis/pull/750)).
+  - Updated OpenSSL to the latest 1.1.1h-2 ([#750](https://github.com/cossacklabs/themis/pull/750)).
+
+
+## [0.13.5](https://github.com/cossacklabs/themis/releases/tag/0.13.5), November 12th 2020
+
+**Hotfix for Apple platforms:**
+
+- Resolved issues with deploying macOS apps with Apple Silicon support when Themis is installed via Carthage
+
+_Code:_
+
+- **Objective-C / Swift**
+
+  - Fixed code signing issues on macOS with Xcode 12 ([#744](https://github.com/cossacklabs/themis/pull/744)).
+
+
+## [0.13.4](https://github.com/cossacklabs/themis/releases/tag/0.13.4), October 29th 2020
+
+**Hotfix for Apple platforms:**
+
+- Improved Apple Silicon support (arm64 builds for macOS with Xcode 12.2 beta)
+- Resolved issues with stable Xcode 12 support (disabled arm64 builds for iOS Simulator)
+- Updated OpenSSL to the latest 1.1.1h
+- CocoaPods is now using OpenSSL 1.1.1h by default (again)
+- CocoaPods and Carthage now both produce full-static builds of Themis, resolving critical issues with App Store deployment (see [#715](https://github.com/cossacklabs/themis/issues/715))
+
+_Code:_
+
+- **Objective-C / Swift**
+
+  - Switched to test on Xcode 12.0, disable ARM64 builds for Themis CocoaPods and Themis Carthage ([#721](https://github.com/cossacklabs/themis/pull/721), [#722](https://github.com/cossacklabs/themis/pull/722), [#732](https://github.com/cossacklabs/themis/pull/732), [#733](https://github.com/cossacklabs/themis/pull/733)).
+  - CocoaPods will now link ObjCThemis statically into application ([#731](https://github.com/cossacklabs/themis/pull/731), [#735](https://github.com/cossacklabs/themis/pull/735)).
+  - Updated OpenSSL to the latest 1.1.1h ([#735](https://github.com/cossacklabs/themis/pull/735)).
+
+
+## [0.13.3](https://github.com/cossacklabs/themis/releases/tag/0.13.3), October 12th 2020
+
+**Hotfix for Themis CocoaPods and Xcode12:**
+
+- Default Themis podspec is using OpenSSL 1.0.2u again ("themis/themis-openssl"). OpenSSL 1.1.1g podspec ("themis/openssl") might be broken for Xcode12, fixing is in progress. BoringSSL podspec ("themis/themis-boringssl") is available too.
+
+_Code:_
+
+- **Objective-C / Swift**
+
+  - Themis CocoaPods podspec is updated with bitcode fixes and disabling arm64 simulator in order to support Xcode12 builds. This is a podspec change only, no changes in code, headers or whatsoever. Default podspec is set as "themis/themis-openssl", which uses OpenSSL 1.0.2u. Fixes for "themis/openssl" podspec (OpenSSL 1.1.1g) might arrive soon.
+
+
+
 ## [0.13.2](https://github.com/cossacklabs/themis/releases/tag/0.13.2), August 14th 2020
 
 **Breaking changes and deprecations:**
