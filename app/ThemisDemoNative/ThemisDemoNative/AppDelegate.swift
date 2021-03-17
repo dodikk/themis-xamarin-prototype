@@ -27,16 +27,17 @@ didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: An
         let masterKey = "UkVDMgAAAC13PCVZAKOczZXUpvkhsC+xvwWnv3CLmlG0Wzy8ZBMnT+2yx/dg";
         let masterKeyData = Data(
             base64Encoded:masterKey,
-            options: .ignoreUnknownCharacters);
+            options: .ignoreUnknownCharacters)!;
         
-        let cellSeal = TSCellSeal(masterKey: masterKeyData);
+        let cellSeal = TSCellSeal(key: masterKeyData);
         let initialMessagePlainText = "iOS native project plain text message";
+        let initialPlainTextData = initialMessagePlainText.data(using: .utf8)!;
         print("initial text: \(initialMessagePlainText)");
         
-        let cipherText = cellSeal.encrypt(message: initialMessagePlainText);
+        let cipherText = try! cellSeal!.encrypt(initialPlainTextData);
         print("encrypted text: \(cipherText)");
         
-        let resultPlainTextData = cellSeal.decrypt(cipherText);
+        let resultPlainTextData = try! cellSeal!.decrypt(cipherText);
         
         let resultPlainText = String(
             data: resultPlainTextData,
