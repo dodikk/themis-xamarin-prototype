@@ -1,4 +1,4 @@
-github "cossacklabs/themis" "0.13.2"
+github "cossacklabs/themis" "0.13.6"
 
 ### Avoid implicit versions for now to avoid breakign changes
 # ---

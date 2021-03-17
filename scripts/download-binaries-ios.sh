@@ -6,7 +6,9 @@ cd "../lib-native/ios"
 rm -rf Carthage
 rm Cartfile.resolved
 
-carthage update
+carthage update \
+    --platform "ios" \
+    --cache-builds
 
 
 cd "$SCRIPT_START_DIR"
